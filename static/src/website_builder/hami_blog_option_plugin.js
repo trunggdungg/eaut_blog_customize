@@ -22,6 +22,16 @@ class HamiBlogOptionPlugin extends Plugin {
             withSequence(SNIPPET_SPECIFIC, HamiNewsCardOption),
             withSequence(SNIPPET_SPECIFIC, HamiMostViewedOption),
         ],
+        // Cho phép kéo đổi thứ tự cột (snippet "Hoạt động HAMI"). Card của
+        // "Tin tức theo thể loại" là `.row > div` nên builder đã cho kéo sẵn.
+        is_movable_selector: { selector: ".s_hami_cols > .s_hami_col", direction: "horizontal" },
+        // Nội dung nạp lúc chạy không được lưu cứng vào trang.
+        clean_for_save_handlers: ({ root }) => {
+            const bodySelector = ".s_hami_col_body, .s_hami_news_body, .s_hami_most_viewed_body";
+            for (const bodyEl of root.querySelectorAll(bodySelector)) {
+                bodyEl.replaceChildren();
+            }
+        },
     };
 
     setup() {

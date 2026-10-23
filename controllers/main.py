@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
-import json
-import re
-
-from odoo import fields, http
+from odoo import http
 from odoo.http import request
-
-_COVER_URL_RE = re.compile(r"url\(\s*['\"]?([^'\")]+)['\"]?\s*\)")
 
 
 def _to_int(value, default=0):
@@ -25,24 +20,6 @@ class HamiBlog(http.Controller):
     # ------------------------------------------------------------------
     # Helpers
     # ------------------------------------------------------------------
-    def _domain(self, blog_id=-1):
-        domain = list(request.website.website_domain())
-        domain += [
-            ('website_published', '=', True),
-            ('post_date', '<=', fields.Datetime.now()),
-        ]
-        if blog_id and blog_id > 0:
-            domain.append(('blog_id', '=', blog_id))
-        return domain
-
-    def _cover_url(self, post):
-        try:
-            props = json.loads(post.cover_properties or '{}')
-        except ValueError:
-            return False
-        match = _COVER_URL_RE.search(props.get('background-image') or '')
-        return match.group(1) if match else False
-
     def _pick_post(self, domain, mode, post_id):
         """Chọn bài tiêu biểu theo quy tắc admin đặt: latest | featured | manual."""
         Post = request.env['blog.post']
@@ -66,10 +43,6 @@ class HamiBlog(http.Controller):
                 return '/blog/%s' % request.env['ir.http']._slug(blog)
         return '/blog'
 
-    def _render(self, template, values):
-        values['cover_of'] = self._cover_url
-        return request.render(template, values)
-
     # ------------------------------------------------------------------
     # Routes
     # ------------------------------------------------------------------
@@ -77,9 +50,11 @@ class HamiBlog(http.Controller):
                 website=True, methods=['GET'], sitemap=False)
     def column(self, blog_id=-1, mode='latest', post_id=0, show_image='true',
                show_date='true', show_teaser='false', **kw):
+        Post = request.env['blog.post']
         blog_id = _to_int(blog_id, -1)
-        post = self._pick_post(self._domain(blog_id), mode, _to_int(post_id))
-        return self._render('hami_blog.column_body', {
+        post = self._pick_post(
+            Post._hami_published_domain(blog_id), mode, _to_int(post_id))
+        return request.render('hami_blog.column_body', {
             'post': post,
             'show_image': _to_bool(show_image),
             'show_date': _to_bool(show_date),
@@ -91,16 +66,17 @@ class HamiBlog(http.Controller):
     def category(self, blog_id=-1, mode='latest', post_id=0, limit=3,
                  show_image='true', show_date='true',
                  viewall_label='Xem tất cả', **kw):
+        Post = request.env['blog.post']
         blog_id = _to_int(blog_id, -1)
         limit = max(0, min(_to_int(limit, 3), 20))
-        domain = self._domain(blog_id)
+        domain = Post._hami_published_domain(blog_id)
         featured = self._pick_post(domain, mode, _to_int(post_id))
-        others = request.env['blog.post']
+        others = Post
         if featured and limit:
-            others = request.env['blog.post'].search(
+            others = Post.search(
                 domain + [('id', '!=', featured.id)],
                 order='post_date desc, id desc', limit=limit)
-        return self._render('hami_blog.category_body', {
+        return request.render('hami_blog.category_body', {
             'featured': featured,
             'others': others,
             'show_image': _to_bool(show_image),
@@ -112,12 +88,10 @@ class HamiBlog(http.Controller):
     @http.route('/hami_blog/most_viewed', type='http', auth='public',
                 website=True, methods=['GET'], sitemap=False)
     def most_viewed(self, blog_id=-1, limit=5, show_date='true', **kw):
-        blog_id = _to_int(blog_id, -1)
         limit = max(1, min(_to_int(limit, 5), 20))
-        posts = request.env['blog.post'].search(
-            self._domain(blog_id), order='visits desc, post_date desc, id desc',
-            limit=limit)
-        return self._render('hami_blog.most_viewed_body', {
+        posts = request.env['blog.post'].hami_most_viewed(
+            _to_int(blog_id, -1), limit)
+        return request.render('hami_blog.most_viewed_body', {
             'posts': posts,
             'show_date': _to_bool(show_date),
         })

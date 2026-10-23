@@ -37,10 +37,19 @@ class HamiFetchInteraction extends Interaction {
     }
 }
 
+/**
+ * Đăng ký ở cả 3 chế độ: xem thường, chỉnh sửa (editor) và xem trước (hộp thoại
+ * chèn khối). Lớp nền đăng ký dạng abstract để builder không báo thiếu mixin.
+ */
 function registerInteraction(name, InteractionClass) {
     registry.category("public.interactions").add(name, InteractionClass);
     registry.category("public.interactions.edit").add(name, { Interaction: InteractionClass });
     registry.category("public.interactions.preview").add(name, { Interaction: InteractionClass });
+}
+for (const mode of ["edit", "preview"]) {
+    registry
+        .category(`public.interactions.${mode}`)
+        .add("hami_blog.fetch_base", { Interaction: HamiFetchInteraction, isAbstract: true });
 }
 
 /** Một cột của snippet "Hoạt động HAMI". */
@@ -144,3 +153,17 @@ export class HamiActivities extends Interaction {
     }
 }
 registerInteraction("hami_blog.activities", HamiActivities);
+
+/** Nút in ở cột chia sẻ của trang chi tiết bài viết. */
+export class HamiPrint extends Interaction {
+    static selector = ".hami_share_print";
+    dynamicContent = {
+        _root: {
+            "t-on-click": (ev) => {
+                ev.preventDefault();
+                window.print();
+            },
+        },
+    };
+}
+registry.category("public.interactions").add("hami_blog.print", HamiPrint);

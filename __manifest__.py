@@ -8,6 +8,7 @@ Mở rộng website_blog (Odoo 19):
  - Snippet "Hoạt động HAMI": nhiều cột, mỗi cột một bài tiêu biểu của một blog.
  - Snippet "Tin tức theo thể loại": card gồm 1 bài tiêu biểu + N tiêu đề + Xem tất cả.
  - Snippet "Xem nhiều" và "CTA Đăng ký hội viên".
+ - Trang danh sách blog và trang chi tiết bài viết theo giao diện HAMI.
     """,
     'category': 'Website/Website',
     'version': '19.0.1.0.0',
@@ -16,6 +17,7 @@ Mở rộng website_blog (Odoo 19):
     'data': [
         'views/blog_post_views.xml',
         'views/hami_blog_templates.xml',
+        'views/blog_page_templates.xml',
         'views/snippets/snippets.xml',
         'views/snippets/s_hami_activities.xml',
         'views/snippets/s_hami_news_blocks.xml',
