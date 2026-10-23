@@ -3,8 +3,7 @@
     <!-- Ảnh bìa của bài viết (hoặc khung trống nếu chưa có ảnh) -->
     <template id="post_image" name="HAMI: ảnh bài viết">
         <a t-att-href="post.website_url" class="s_hami_img" t-att-aria-label="post.name" tabindex="-1">
-            <t t-set="cover" t-value="cover_of(post)"/>
-            <img t-if="cover" t-att-src="cover" t-att-alt="post.name" loading="lazy"/>
+           <img t-if="post.hami_cover_url" t-att-src="post.hami_cover_url" t-att-alt="post.name" loading="lazy"/>
         </a>
     </template>
 
@@ -40,7 +39,7 @@
                 <t t-if="show_date" t-call="hami_blog.post_date"/>
             </article>
             <ul t-if="others" class="s_hami_bullets">
-                <li t-foreach="others" t-as="other" t-key="other.id">
+                 <li t-foreach="others" t-as="other">
                     <i class="fa fa-check" role="img" aria-hidden="true"/>
                     <a t-att-href="other.website_url" t-out="other.name"/>
                 </li>
@@ -68,7 +67,7 @@
                 <t t-if="show_date" t-call="hami_blog.post_date"/>
             </article>
             <ul t-if="len(posts) &gt; 1" class="s_hami_mv_list">
-                <li t-foreach="posts[1:]" t-as="item" t-key="item.id" class="s_hami_mv_item">
+                 <li t-foreach="posts[1:]" t-as="item" class="s_hami_mv_item">
                     <t t-set="post" t-value="item"/>
                     <t t-call="hami_blog.post_image"/>
                     <div class="s_hami_mv_text">

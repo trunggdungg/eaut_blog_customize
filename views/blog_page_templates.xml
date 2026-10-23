@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ================================================================
+         Sidebar dùng chung (trang danh sách + trang chi tiết).
+         Biến đầu vào: mv_blog_id (blog lọc "Xem nhiều", -1 = tất cả blog).
+         Render phía server nên Google đọc được.
+         ================================================================ -->
+    <template id="sidebar" name="HAMI: sidebar blog">
+        <t t-call="hami_blog.s_hami_cta"/>
+        <section class="hami_side_box s_hami_box mt-4">
+            <h2 class="s_hami_box_title text-center">XEM NHIỀU</h2>
+            <t t-set="posts" t-value="request.env['blog.post'].hami_most_viewed(mv_blog_id or -1, 5)"/>
+            <t t-set="show_date" t-value="True"/>
+            <t t-call="hami_blog.most_viewed_body"/>
+        </section>
+    </template>
+
+    <!-- ================================================================
+         5. Trang danh sách một blog (và "Tất cả blog", lọc theo tag/ngày/tìm kiếm)
+         Thay thế khối nội dung của website_blog.blog_post_short, giữ nguyên
+         `posts`, `pager`, `blog`... do controller của website_blog truyền vào.
+         ================================================================ -->
+    <template id="blog_post_short_hami" inherit_id="website_blog.blog_post_short"
+              name="HAMI: danh sách bài viết">
+        <xpath expr="//section[@id='o_wblog_index_content']" position="replace">
+            <section id="o_wblog_index_content" class="hami_blog_page hami_blog_list">
+                <div class="container py-4">
+                    <header class="hami_page_head">
+                        <h1 class="hami_page_title">
+                            <t t-if="blog" t-out="blog.name"/>
+                            <t t-else="">Tin tức</t>
+                        </h1>
+                    </header>
+                    <div t-if="original_search and posts" class="alert alert-warning">
+                        Không có kết quả cho '<span t-out="original_search"/>'. Đang hiển thị kết quả cho '<span t-out="search"/>'.
+                    </div>
+                    <div t-if="tag or date_begin or search" class="hami_filter_info">
+                        <t t-out="search_count"/> bài viết
+                        <a t-att-href="blog_url(tag=None, date_begin=None, date_end=None, search=None)" class="ms-2">Xóa bộ lọc ×</a>
+                    </div>
+                    <div class="row g-4">
+                        <div id="o_wblog_posts_loop_container" class="col-lg-9">
+                            <p t-if="not posts" class="s_hami_empty">
+                                <t t-if="search">Không có kết quả cho "<t t-out="search"/>".</t>
+                                <t t-else="">Chưa có bài viết nào.</t>
+                            </p>
+                            <div id="o_wblog_posts_loop" class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 g-4">
+                                <div t-foreach="posts" t-as="blog_post" class="col">
+                                    <article class="s_hami_post hami_card position-relative" name="blog_post">
+                                        <t t-set="post" t-value="blog_post"/>
+                                        <t t-call="hami_blog.post_image"/>
+                                        <h2 class="s_hami_post_title">
+                                            <a t-att-href="blog_post.website_url" t-out="blog_post.name"/>
+                                        </h2>
+                                        <t t-call="hami_blog.post_date"/>
+                                        <p t-if="blog_post.teaser" class="s_hami_post_teaser mt-2" t-out="blog_post.teaser"/>
+                                        <span t-if="not blog_post.website_published"
+                                              class="badge text-bg-danger position-absolute o_not_editable"
+                                              style="top:.5rem; right:.5rem;">Chưa đăng</span>
+                                    </article>
+                                </div>
+                            </div>
+                            <!-- Phân trang của Odoo -->
+                            <t t-call="website.pager">
+                                <t t-set="classname" t-valuef="justify-content-center mt-5"/>
+                                <t t-set="extraLinkClass" t-valuef="post_link"/>
+                            </t>
+                        </div>
+                        <aside class="col-lg-3">
+                            <t t-set="mv_blog_id" t-value="blog.id if blog else -1"/>
+                            <t t-call="hami_blog.sidebar"/>
+                        </aside>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+
+
+
+    <!-- Tắt các tùy chọn gốc của Odoo xung đột với layout HAMI (chỉ khi cài lần đầu,
+         admin vẫn bật lại được): banner đầu trang blog và banner "bài tiếp theo". -->
+    <data noupdate="1">
+        <record id="website_blog.opt_blog_cover_post" model="ir.ui.view">
+            <field name="active" eval="False"/>
+        </record>
+
+    </data>
+</odoo>
