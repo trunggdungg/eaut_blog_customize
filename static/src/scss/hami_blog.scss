@@ -189,18 +189,22 @@
     .hami_box_title { color: var(--hami-red); font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem; }
 }
 .hami_cta {
-    background: var(--hami-red);
-    color: #fff;
     border-radius: var(--hami-radius);
     padding: 1.75rem;
+    // Màu đỏ/chữ trắng chỉ là mặc định: khi admin chọn nền riêng (Nền trong
+    // panel Kiểu) thì builder tự đặt màu, không bị ghi đè ở đây.
+    &:not([style*="background"]):not([class*="bg-"]):not([class*="o_cc"]) {
+        background-color: var(--hami-red);
+        color: #fff;
+    }
     .hami_cta_eyebrow { font-size: .9rem; margin-bottom: .25rem; }
     .hami_cta_title {
-        color: #fff;
+        color: inherit;
         font-weight: 700;
         font-size: 1.5rem;
         padding-bottom: .75rem;
         margin-bottom: 1rem;
-        border-bottom: 2px solid #fff;
+        border-bottom: 2px solid currentColor;
         display: inline-block;
     }
     .hami_cta_btn {

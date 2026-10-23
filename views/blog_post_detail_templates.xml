@@ -7,11 +7,15 @@
     <template id="opt_hami_cta_display" name="HAMI: Đăng ký hội viên"
               inherit_id="website_blog.blog_post_sidebar" active="False" priority="0">
         <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
-            <div class="hami_cta mb-4">
-                <p class="hami_cta_eyebrow">Hội viên HAMI</p>
-                <h2 class="hami_cta_title">ĐĂNG KÝ HỘI VIÊN</h2>
-                <p>Kết nối cùng cộng đồng doanh nghiệp sản xuất sản phẩm công nghiệp chủ lực Hà Nội.</p>
-                <a href="/dang-ky-hoi-vien" class="hami_cta_btn">Đăng ký ngay <i class="fa fa-angle-right" role="img" aria-hidden="true"/></a>
+            <!-- Vùng oe_structure: nội dung mặc định bên dưới được lưu vào trang ở lần
+                 sửa đầu tiên, sau đó admin chỉnh Nền/chữ/nút như một khối thường. -->
+            <div class="oe_structure mb-4" id="oe_structure_hami_cta">
+                <section class="hami_cta s_hami_cta" data-name="Đăng ký hội viên">
+                    <p class="hami_cta_eyebrow">Hội viên HAMI</p>
+                    <h2 class="hami_cta_title">ĐĂNG KÝ HỘI VIÊN</h2>
+                    <p>Kết nối cùng cộng đồng doanh nghiệp sản xuất sản phẩm công nghiệp chủ lực Hà Nội.</p>
+                    <a href="/dang-ky-hoi-vien" class="hami_cta_btn">Đăng ký ngay <i class="fa fa-angle-right" role="img" aria-hidden="true"/></a>
+                </section>
             </div>
         </xpath>
     </template>
