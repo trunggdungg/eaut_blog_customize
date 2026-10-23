@@ -1,0 +1,213 @@
+// ============================================================================
+// HAMI Blog: giao diện tin tức. Đổi màu chủ đạo ở một chỗ duy nhất (biến CSS).
+// ============================================================================
+.s_hami_activities,
+.s_hami_news_blocks,
+.s_hami_most_viewed,
+.s_hami_cta {
+    --hami-red: #E5282B;
+    --hami-red-dark: #c41f22;
+    --hami-ink: #1a1a1a;
+    --hami-muted: #8c8c8c;
+    --hami-line: #e6e6e6;
+    --hami-radius: 8px;
+}
+
+// ---- Tiêu đề lớn của khối -------------------------------------------------
+.s_hami_title {
+    color: var(--hami-red);
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+}
+
+// ---- Bài viết (dùng chung) ------------------------------------------------
+.s_hami_post {
+    .s_hami_img {
+        display: block;
+        aspect-ratio: 16 / 9.6;
+        overflow: hidden;
+        border-radius: var(--hami-radius);
+        background: #f1f1f1;
+        img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    }
+    .s_hami_post_title {
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.25;
+        margin: .9rem 0 .5rem;
+        text-transform: uppercase;
+        a {
+            color: var(--hami-ink);
+            text-decoration: none;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            &:hover { color: var(--hami-red); }
+        }
+    }
+    .s_hami_post_teaser {
+        color: var(--hami-muted);
+        font-size: .9rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
+}
+.s_hami_date {
+    color: var(--hami-muted);
+    font-size: .875rem;
+    .fa { margin-right: .35rem; }
+}
+.s_hami_empty { color: var(--hami-muted); text-align: center; padding: 2rem 0; }
+
+// ---- Snippet "Hoạt động HAMI" --------------------------------------------
+.s_hami_carousel {
+    position: relative;
+    padding: 0 3rem;
+}
+.s_hami_cols {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+}
+.s_hami_col {
+    flex: 0 0 33.3333%;
+    scroll-snap-align: start;
+    padding: 0 2rem;
+    border-right: 1px solid var(--hami-line);
+    &:last-child { border-right: 0; }
+    .s_hami_col_title {
+        color: var(--hami-red);
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    @media (max-width: 991.98px) { flex-basis: 50%; padding: 0 1rem; }
+    @media (max-width: 575.98px) { flex-basis: 100%; border-right: 0; }
+}
+.s_hami_arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    border: 0;
+    background: none;
+    color: var(--hami-red);
+    font-size: 2.25rem;
+    line-height: 1;
+    padding: .25rem .75rem;
+    &.s_hami_prev { left: 0; }
+    &.s_hami_next { right: 0; }
+    &.s_hami_arrow_hidden { visibility: hidden; }
+}
+
+// ---- Snippet "Tin tức theo thể loại" -------------------------------------
+.s_hami_news_card .s_hami_card_inner {
+    height: 100%;
+    background: #fff;
+    border: 1px solid var(--hami-line);
+    border-radius: var(--hami-radius);
+    padding: 1.5rem;
+    .s_hami_card_title {
+        color: var(--hami-red);
+        font-weight: 700;
+        text-align: center;
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+}
+.s_hami_bullets {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    li {
+        display: flex;
+        gap: .6rem;
+        padding: .65rem 0;
+        border-top: 1px solid var(--hami-line);
+        .fa { color: var(--hami-red); margin-top: .2rem; }
+        a {
+            color: var(--hami-ink);
+            font-weight: 500;
+            font-size: .95rem;
+            text-decoration: none;
+            &:hover { color: var(--hami-red); }
+        }
+    }
+}
+.s_hami_viewall_wrap { text-align: center; margin-top: 1rem; }
+.s_hami_viewall {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: var(--hami-red);
+    color: #fff;
+    font-weight: 600;
+    padding: .55rem 1.1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    &:hover { background: var(--hami-red-dark); color: #fff; }
+}
+
+// ---- Snippet "Xem nhiều" --------------------------------------------------
+.s_hami_most_viewed .s_hami_box {
+    background: #fff;
+    border: 1px solid var(--hami-line);
+    border-radius: var(--hami-radius);
+    padding: 1.5rem;
+    .s_hami_box_title { color: var(--hami-red); font-weight: 700; margin-bottom: 1.25rem; }
+}
+.s_hami_mv_list { list-style: none; margin: 1rem 0 0; padding: 0; }
+.s_hami_mv_item {
+    display: flex;
+    gap: .9rem;
+    padding: .9rem 0;
+    border-top: 1px solid var(--hami-line);
+    .s_hami_img { flex: 0 0 100px; aspect-ratio: 4 / 3; border-radius: 4px; }
+    .s_hami_mv_text { min-width: 0; }
+    .s_hami_post_title {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        font-size: .9rem;
+        font-weight: 600;
+        color: var(--hami-ink);
+        text-decoration: none;
+        text-transform: none;
+        &:hover { color: var(--hami-red); }
+    }
+}
+
+// ---- Snippet "Đăng ký hội viên" -------------------------------------------
+.s_hami_cta_box {
+    background: var(--hami-red);
+    color: #fff;
+    border-radius: var(--hami-radius);
+    padding: 1.75rem;
+    .s_hami_cta_eyebrow { font-size: .9rem; margin-bottom: .25rem; }
+    .s_hami_cta_title {
+        color: #fff;
+        font-weight: 700;
+        padding-bottom: .75rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #fff;
+        display: inline-block;
+    }
+    .s_hami_cta_btn {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        background: #fff;
+        color: var(--hami-red);
+        font-weight: 700;
+        padding: .6rem 1.1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        &:hover { background: #fdeaea; }
+    }
+}

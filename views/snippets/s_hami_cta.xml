@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_hami_cta" name="Đăng ký hội viên">
+        <section class="s_hami_cta pt24 pb24" data-snippet="s_hami_cta" data-name="Đăng ký hội viên">
+            <div class="s_hami_cta_box">
+                <p class="s_hami_cta_eyebrow">Hội viên HAMI</p>
+                <h2 class="s_hami_cta_title">ĐĂNG KÝ HỘI VIÊN</h2>
+                <p class="s_hami_cta_text">Kết nối cùng cộng đồng doanh nghiệp sản xuất sản phẩm công nghiệp chủ lực Hà Nội.</p>
+                <a href="/dang-ky-hoi-vien" class="s_hami_cta_btn">Đăng ký ngay <i class="fa fa-angle-right" role="img" aria-hidden="true"/></a>
+            </div>
+        </section>
+    </template>
+</odoo>

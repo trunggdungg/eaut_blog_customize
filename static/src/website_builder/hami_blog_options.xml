@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<!-- ======= Snippet "Hoạt động HAMI" ======= -->
+<t t-name="hami_blog.HamiActivitiesOption">
+    <BuilderRow label.translate="Cột">
+        <BuilderButton type="'success'" action="'addItem'"
+                       actionParam="'.s_hami_col:last-of-type'" preview="false">
+            Thêm cột
+        </BuilderButton>
+    </BuilderRow>
+</t>
+
+<t t-name="hami_blog.HamiColumnOption">
+    <BuilderRow label.translate="Blog nguồn">
+        <BuilderSelect dataAttributeAction="'blogId'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="'-1'">Tất cả blog</BuilderSelectItem>
+            <t t-foreach="source.blogs" t-as="blog" t-key="blog.id">
+                <BuilderSelectItem dataAttributeActionValue="`${blog.id}`" t-out="blog.name"/>
+            </t>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Chọn bài">
+        <BuilderSelect dataAttributeAction="'mode'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="'latest'">Mới nhất</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'featured'">Bài tiêu biểu (ghim)</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'manual'">Chọn tay</BuilderSelectItem>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Bài viết" level="1" t-if="state.mode === 'manual'">
+        <BuilderSelect dataAttributeAction="'postId'" preview="false">
+            <t t-foreach="manualPosts" t-as="post" t-key="post.id">
+                <BuilderSelectItem dataAttributeActionValue="`${post.id}`" t-out="post.name"/>
+            </t>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Ảnh">
+        <BuilderCheckbox dataAttributeAction="'showImage'" dataAttributeActionValue="'true'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Ngày đăng">
+        <BuilderCheckbox dataAttributeAction="'showDate'" dataAttributeActionValue="'true'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Đoạn dẫn">
+        <BuilderCheckbox dataAttributeAction="'showTeaser'" dataAttributeActionValue="'true'"/>
+    </BuilderRow>
+</t>
+
+<!-- ======= Snippet "Tin tức theo thể loại" ======= -->
+<t t-name="hami_blog.HamiNewsBlocksOption">
+    <BuilderRow label.translate="Card">
+        <BuilderButton type="'success'" action="'addItem'"
+                       actionParam="'.s_hami_news_card:last-of-type'" preview="false">
+            Thêm thể loại
+        </BuilderButton>
+    </BuilderRow>
+    <BuilderContext applyTo="'.s_hami_news_grid'">
+        <BuilderRow label.translate="Số card mỗi hàng">
+            <BuilderSelect>
+                <BuilderSelectItem classAction="'row-cols-md-1'">1</BuilderSelectItem>
+                <BuilderSelectItem classAction="'row-cols-md-2'">2</BuilderSelectItem>
+                <BuilderSelectItem classAction="'row-cols-md-3'">3</BuilderSelectItem>
+            </BuilderSelect>
+        </BuilderRow>
+    </BuilderContext>
+</t>
+
+<t t-name="hami_blog.HamiNewsCardOption">
+    <BuilderRow label.translate="Blog nguồn">
+        <BuilderSelect dataAttributeAction="'blogId'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="'-1'">Tất cả blog</BuilderSelectItem>
+            <t t-foreach="source.blogs" t-as="blog" t-key="blog.id">
+                <BuilderSelectItem dataAttributeActionValue="`${blog.id}`" t-out="blog.name"/>
+            </t>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Bài tiêu biểu">
+        <BuilderSelect dataAttributeAction="'mode'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="'latest'">Mới nhất</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'featured'">Bài tiêu biểu (ghim)</BuilderSelectItem>
+            <BuilderSelectItem dataAttributeActionValue="'manual'">Chọn tay</BuilderSelectItem>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Bài viết" level="1" t-if="state.mode === 'manual'">
+        <BuilderSelect dataAttributeAction="'postId'" preview="false">
+            <t t-foreach="manualPosts" t-as="post" t-key="post.id">
+                <BuilderSelectItem dataAttributeActionValue="`${post.id}`" t-out="post.name"/>
+            </t>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Số tiêu đề phụ">
+        <BuilderNumberInput dataAttributeAction="'limit'" min="0" max="20"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Ảnh">
+        <BuilderCheckbox dataAttributeAction="'showImage'" dataAttributeActionValue="'true'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Ngày đăng">
+        <BuilderCheckbox dataAttributeAction="'showDate'" dataAttributeActionValue="'true'"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Chữ nút xem tất cả">
+        <BuilderTextInput dataAttributeAction="'viewallLabel'"/>
+    </BuilderRow>
+</t>
+
+<!-- ======= Snippet "Xem nhiều" ======= -->
+<t t-name="hami_blog.HamiMostViewedOption">
+    <BuilderRow label.translate="Blog nguồn">
+        <BuilderSelect dataAttributeAction="'blogId'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="'-1'">Tất cả blog</BuilderSelectItem>
+            <t t-foreach="source.blogs" t-as="blog" t-key="blog.id">
+                <BuilderSelectItem dataAttributeActionValue="`${blog.id}`" t-out="blog.name"/>
+            </t>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Số bài">
+        <BuilderNumberInput dataAttributeAction="'limit'" min="1" max="20"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Ngày đăng">
+        <BuilderCheckbox dataAttributeAction="'showDate'" dataAttributeActionValue="'true'"/>
+    </BuilderRow>
+</t>
+
+</templates>

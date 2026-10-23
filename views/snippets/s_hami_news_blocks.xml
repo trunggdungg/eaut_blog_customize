@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_hami_news_blocks" name="Tin tức theo thể loại">
+        <section class="s_hami_news_blocks pt48 pb48" data-snippet="s_hami_news_blocks" data-name="Tin tức theo thể loại">
+            <div class="container">
+                <h2 class="s_hami_title text-center">TIN MỚI - SỰ KIỆN</h2>
+                <div class="row s_hami_news_grid row-cols-1 row-cols-md-2 g-4">
+                    <div class="col s_hami_news_card" data-name="Card thể loại" data-blog-id="-1" data-mode="latest"
+                         data-limit="3" data-show-image="true" data-show-date="true" data-viewall-label="Xem tất cả">
+                        <div class="s_hami_card_inner">
+                            <h2 class="s_hami_card_title">HOẠT ĐỘNG BAN HỘI VIÊN</h2>
+                            <div class="s_hami_news_body o_not_editable"/>
+                        </div>
+                    </div>
+                    <div class="col s_hami_news_card" data-name="Card thể loại" data-blog-id="-1" data-mode="latest"
+                         data-limit="3" data-show-image="true" data-show-date="true" data-viewall-label="Xem tất cả">
+                        <div class="s_hami_card_inner">
+                            <h2 class="s_hami_card_title">HOẠT ĐỘNG TRUYỀN THÔNG</h2>
+                            <div class="s_hami_news_body o_not_editable"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

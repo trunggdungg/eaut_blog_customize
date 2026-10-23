@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_blog_post_form_hami" model="ir.ui.view">
+        <field name="name">blog.post.form.hami</field>
+        <field name="model">blog.post</field>
+        <field name="inherit_id" ref="website_blog.view_blog_post_form"/>
+        <field name="arch" type="xml">
+            <field name="tag_ids" position="after">
+                <field name="is_featured"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_blog_post_list_hami" model="ir.ui.view">
+        <field name="name">blog.post.list.hami</field>
+        <field name="model">blog.post</field>
+        <field name="inherit_id" ref="website_blog.view_blog_post_list"/>
+        <field name="arch" type="xml">
+            <field name="blog_id" position="after">
+                <field name="is_featured" optional="show"/>
+            </field>
+        </field>
+    </record>
+</odoo>
