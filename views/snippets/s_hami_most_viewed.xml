@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="s_hami_most_viewed" name="Xem nhiều">
-        <section class="s_hami_most_viewed pt24 pb24" data-snippet="s_hami_most_viewed" data-name="Xem nhiều"
+        <section class="s_hami_most_viewed s_hami_box pt24 pb24 px-4" data-snippet="s_hami_most_viewed" data-name="Xem nhiều"
                  data-blog-id="-1" data-limit="5" data-show-date="true">
-            <div class="s_hami_box">
-                <h2 class="s_hami_box_title text-center">XEM NHIỀU</h2>
-                <div class="s_hami_most_viewed_body o_not_editable"/>
-            </div>
+            <h2 class="s_hami_box_title text-center">XEM NHIỀU</h2>
+            <div class="s_hami_most_viewed_body o_not_editable"/>
         </section>
     </template>
 </odoo>

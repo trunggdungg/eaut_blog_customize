@@ -154,6 +154,8 @@
     &:hover { background: var(--hami-red-dark); color: #fff; }
 }
 
+.hami_side_box { background: #fff; }
+
 // ---- Snippet "Xem nhiều" (và hộp cùng kiểu ở sidebar) ----------------------
 .s_hami_box {
     --hami-red: #E5282B;
@@ -161,7 +163,6 @@
     --hami-muted: #8c8c8c;
     --hami-line: #e6e6e6;
     --hami-radius: 8px;
-    background: #fff;
     border: 1px solid var(--hami-line);
     border-radius: var(--hami-radius);
     padding: 1.5rem;
@@ -190,18 +191,20 @@
 }
 
 // ---- Snippet "Đăng ký hội viên" -------------------------------------------
-.s_hami_cta_box {
-    background: var(--hami-red);
-    color: #fff;
+// Màu mặc định chỉ áp khi admin chưa chọn nền riêng (Nền trong panel Kiểu).
+.s_hami_cta {
     border-radius: var(--hami-radius);
-    padding: 1.75rem;
+    color: #fff;
+    &:not([style*="background"]):not([class*="bg-"]):not([class*="o_cc"]) {
+        background-color: var(--hami-red);
+    }
     .s_hami_cta_eyebrow { font-size: .9rem; margin-bottom: .25rem; }
     .s_hami_cta_title {
-        color: #fff;
+        color: inherit;
         font-weight: 700;
         padding-bottom: .75rem;
         margin-bottom: 1rem;
-        border-bottom: 2px solid #fff;
+        border-bottom: 2px solid currentColor;
         display: inline-block;
     }
     .s_hami_cta_btn {
@@ -216,6 +219,15 @@
         text-decoration: none;
         &:hover { background: #fdeaea; }
     }
+}
+
+// Khối đặt độ rộng bằng lớp col-md-*: khi đứng riêng (không nằm trong .row)
+// thì căn giữa trang.
+:not(.row) > .s_hami_cta[class*="col-md-"],
+:not(.row) > .s_hami_most_viewed[class*="col-md-"],
+:not(.row) > .s_hami_news_card[class*="col-md-"] {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 // ============================================================================

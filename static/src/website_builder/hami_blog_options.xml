@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
 
+<!-- Độ rộng bằng lớp col-md-*: trong lưới (.row) là cột, đứng riêng thì là % bề ngang -->
+<t t-name="hami_blog.HamiWidthRow">
+    <BuilderRow label.translate="Độ rộng">
+        <BuilderSelect>
+            <BuilderSelectItem classAction="''">Tự động</BuilderSelectItem>
+            <BuilderSelectItem classAction="'col-md-4'">1/3</BuilderSelectItem>
+            <BuilderSelectItem classAction="'col-md-6'">1/2</BuilderSelectItem>
+            <BuilderSelectItem classAction="'col-md-8'">2/3</BuilderSelectItem>
+            <BuilderSelectItem classAction="'col-md-12'">Đầy đủ</BuilderSelectItem>
+        </BuilderSelect>
+    </BuilderRow>
+</t>
+
 <!-- ======= Snippet "Hoạt động HAMI" ======= -->
 <t t-name="hami_blog.HamiActivitiesOption">
     <BuilderRow label.translate="Cột">
@@ -65,6 +78,7 @@
 </t>
 
 <t t-name="hami_blog.HamiNewsCardOption">
+    <t t-call="hami_blog.HamiWidthRow"/>
     <BuilderRow label.translate="Blog nguồn">
         <BuilderSelect dataAttributeAction="'blogId'" preview="false">
             <BuilderSelectItem dataAttributeActionValue="'-1'">Tất cả blog</BuilderSelectItem>
@@ -103,6 +117,7 @@
 
 <!-- ======= Snippet "Xem nhiều" ======= -->
 <t t-name="hami_blog.HamiMostViewedOption">
+    <t t-call="hami_blog.HamiWidthRow"/>
     <BuilderRow label.translate="Blog nguồn">
         <BuilderSelect dataAttributeAction="'blogId'" preview="false">
             <BuilderSelectItem dataAttributeActionValue="'-1'">Tất cả blog</BuilderSelectItem>
@@ -117,6 +132,11 @@
     <BuilderRow label.translate="Ngày đăng">
         <BuilderCheckbox dataAttributeAction="'showDate'" dataAttributeActionValue="'true'"/>
     </BuilderRow>
+</t>
+
+<!-- ======= Snippet "Đăng ký hội viên" (nền/chiều cao dùng option chuẩn của section) ======= -->
+<t t-name="hami_blog.HamiCtaOption">
+    <t t-call="hami_blog.HamiWidthRow"/>
 </t>
 
 </templates>

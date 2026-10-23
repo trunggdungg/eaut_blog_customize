@@ -62,3 +62,8 @@ export class HamiMostViewedOption extends BaseOptionComponent {
         this.source = useHamiSource(this);
     }
 }
+
+export class HamiCtaOption extends BaseOptionComponent {
+    static template = "hami_blog.HamiCtaOption";
+    static selector = ".s_hami_cta";
+}
