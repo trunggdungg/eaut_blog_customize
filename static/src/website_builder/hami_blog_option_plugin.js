@@ -5,10 +5,8 @@ import { registry } from "@web/core/registry";
 import {
     HamiActivitiesOption,
     HamiColumnOption,
-    HamiCtaOption,
     HamiNewsBlocksOption,
     HamiNewsCardOption,
-    HamiMostViewedOption,
 } from "./hami_blog_options";
 
 class HamiBlogOptionPlugin extends Plugin {
@@ -21,21 +19,13 @@ class HamiBlogOptionPlugin extends Plugin {
             withSequence(SNIPPET_SPECIFIC, HamiColumnOption),
             withSequence(SNIPPET_SPECIFIC, HamiNewsBlocksOption),
             withSequence(SNIPPET_SPECIFIC, HamiNewsCardOption),
-            withSequence(SNIPPET_SPECIFIC, HamiMostViewedOption),
-            withSequence(SNIPPET_SPECIFIC, HamiCtaOption),
         ],
         // Cho phép kéo đổi thứ tự cột (snippet "Hoạt động HAMI"). Card của
         // "Tin tức theo thể loại" là `.row > div` nên builder đã cho kéo sẵn.
         is_movable_selector: { selector: ".s_hami_cols > .s_hami_col", direction: "horizontal" },
-        // Cho phép thả "Đăng ký hội viên" / "Xem nhiều" cạnh card trong lưới
-        // "Tin tức theo thể loại" (khối trở thành một ô của lưới).
-        dropzone_selector: {
-            selector: ".s_hami_cta, .s_hami_most_viewed",
-            dropNear: ".s_hami_news_card, .s_hami_news_grid > section",
-        },
         // Nội dung nạp lúc chạy không được lưu cứng vào trang.
         clean_for_save_handlers: ({ root }) => {
-            const bodySelector = ".s_hami_col_body, .s_hami_news_body, .s_hami_most_viewed_body";
+            const bodySelector = ".s_hami_col_body, .s_hami_news_body";
             for (const bodyEl of root.querySelectorAll(bodySelector)) {
                 bodyEl.replaceChildren();
             }

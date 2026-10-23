@@ -15,10 +15,6 @@
                t-thumbnail="/hami_blog/static/src/img/snippets_thumbs/s_hami_activities.svg"/>
             <t t-snippet="hami_blog.s_hami_news_blocks" string="Tin tức theo thể loại" group="hami_blog"
                t-thumbnail="/hami_blog/static/src/img/snippets_thumbs/s_hami_news_blocks.svg"/>
-            <t t-snippet="hami_blog.s_hami_most_viewed" string="Xem nhiều" group="hami_blog"
-               t-thumbnail="/hami_blog/static/src/img/snippets_thumbs/s_hami_most_viewed.svg"/>
-            <t t-snippet="hami_blog.s_hami_cta" string="Đăng ký hội viên" group="hami_blog"
-               t-thumbnail="/hami_blog/static/src/img/snippets_thumbs/s_hami_cta.svg"/>
         </xpath>
     </template>
 </odoo>

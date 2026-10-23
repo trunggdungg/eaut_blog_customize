@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TẠM DỪNG: chưa nạp trong __manifest__.py. Thêm lại vào 'data' khi làm tiếp. -->
+<odoo>
+    <!-- ================================================================
+         6. Trang chi tiết bài viết
+         Khối ảnh bìa gốc của Odoo được giữ lại nhưng chỉ hiện trong editor
+         (để admin còn đổi ảnh bìa/tiêu đề); khách xem layout HAMI bên dưới.
+         ================================================================ -->
+    <template id="blog_post_complete_hami" inherit_id="website_blog.blog_post_complete"
+              name="HAMI: chi tiết bài viết">
+        <xpath expr="//section[@id='o_wblog_post_top']" position="attributes">
+            <attribute name="class" add="hami_cover_edit_only" separator=" "/>
+        </xpath>
+        <xpath expr="//section[@id='o_wblog_post_main']" position="replace">
+            <section id="o_wblog_post_main" class="hami_blog_page hami_post_page">
+                <div class="container py-4">
+                    <div class="row g-4">
+                        <div id="o_wblog_post_content" class="col-lg-9">
+                            <t t-call="website_blog.post_breadcrumbs">
+                                <t t-set="additionnal_classes" t-value="'bg-transparent px-0 mb-3'"/>
+                            </t>
+                            <span class="hami_post_label">Tin tức HAMI</span>
+                            <h1 class="hami_post_title" t-out="blog_post.name"/>
+                            <div class="hami_post_meta">
+                                <time t-att-datetime="blog_post.post_date and blog_post.post_date.date().isoformat()">
+                                    <i class="fa fa-calendar" role="img" aria-hidden="true"/>
+                                    <t t-out="blog_post.post_date" t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}"/>
+                                </time>
+                                <span class="hami_post_sep">|</span>
+                                <a t-attf-href="/blog/#{slug(blog_post.blog_id)}" t-out="blog_post.blog_id.name"/>
+                            </div>
+
+                            <div class="hami_post_layout">
+                                <!-- Nút chia sẻ: cột dọc bên trái -->
+                                <t t-set="share" t-value="blog_post.hami_share_links(request.httprequest.base_url)"/>
+                                <div class="hami_share o_not_editable">
+                                    <a t-att-href="share['facebook']" target="_blank" rel="noopener"
+                                       aria-label="Chia sẻ Facebook" title="Chia sẻ Facebook">
+                                        <i class="fa fa-facebook" role="img" aria-hidden="true"/>
+                                    </a>
+                                    <a t-att-href="share['zalo']" target="_blank" rel="noopener"
+                                       aria-label="Chia sẻ Zalo" title="Chia sẻ Zalo" class="hami_share_zalo">Zalo</a>
+                                    <a href="#" class="hami_share_print" aria-label="In bài viết" title="In bài viết">
+                                        <i class="fa fa-print" role="img" aria-hidden="true"/>
+                                    </a>
+                                    <a t-att-href="share['email']" aria-label="Gửi email" title="Gửi email">
+                                        <i class="fa fa-envelope" role="img" aria-hidden="true"/>
+                                    </a>
+                                </div>
+
+                                <div class="hami_post_main">
+                                    <div t-if="blog_post.teaser" class="hami_post_teaser" t-out="blog_post.teaser"/>
+                                    <t t-set="editor_message">VIẾT TẠI ĐÂY HOẶC KÉO THẢ KHỐI</t>
+                                    <div t-field="blog_post.content"
+                                         t-att-data-editor-message="editor_message"
+                                         class="o_wblog_post_content_field hami_post_body"/>
+                                    <div t-if="blog_post.tag_ids" class="css_editable_mode_hidden hami_post_tags">
+                                        <a t-foreach="blog_post.tag_ids" t-as="one_tag"
+                                           t-attf-href="#{blog_url(tag=slug(one_tag), date_begin=False, date_end=False)}"
+                                           class="badge o_tag post_link me-1" t-out="one_tag.name"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tin liên quan -->
+                            <t t-set="related_posts" t-value="blog_post.hami_related_posts(3)"/>
+                            <div t-if="related_posts" class="hami_related css_editable_mode_hidden">
+                                <h2 class="hami_section_title">TIN LIÊN QUAN</h2>
+                                <div class="row row-cols-1 row-cols-md-3 g-4">
+                                    <div t-foreach="related_posts" t-as="related" class="col">
+                                        <article class="s_hami_post hami_card">
+                                            <t t-set="post" t-value="related"/>
+                                            <t t-call="hami_blog.post_image"/>
+                                            <h3 class="s_hami_post_title">
+                                                <a t-att-href="related.website_url" t-out="related.name"/>
+                                            </h3>
+                                            <p t-if="related.teaser" class="s_hami_post_teaser" t-out="related.teaser"/>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <aside class="col-lg-3 css_editable_mode_hidden">
+                            <t t-set="mv_blog_id" t-value="-1"/>
+                            <t t-call="hami_blog.sidebar"/>
+                        </aside>
+                    </div>
+                </div>
+            </section>
+        </xpath>
+    </template>
+
+    <data noupdate="1">
+        <record id="website_blog.opt_blog_post_read_next" model="ir.ui.view">
+            <field name="active" eval="False"/>
+        </record>
+    </data>
+</odoo>

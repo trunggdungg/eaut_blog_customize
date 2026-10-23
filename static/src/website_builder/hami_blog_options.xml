@@ -115,28 +115,4 @@
     </BuilderRow>
 </t>
 
-<!-- ======= Snippet "Xem nhiều" ======= -->
-<t t-name="hami_blog.HamiMostViewedOption">
-    <t t-call="hami_blog.HamiWidthRow"/>
-    <BuilderRow label.translate="Blog nguồn">
-        <BuilderSelect dataAttributeAction="'blogId'" preview="false">
-            <BuilderSelectItem dataAttributeActionValue="'-1'">Tất cả blog</BuilderSelectItem>
-            <t t-foreach="source.blogs" t-as="blog" t-key="blog.id">
-                <BuilderSelectItem dataAttributeActionValue="`${blog.id}`" t-out="blog.name"/>
-            </t>
-        </BuilderSelect>
-    </BuilderRow>
-    <BuilderRow label.translate="Số bài">
-        <BuilderNumberInput dataAttributeAction="'limit'" min="1" max="20"/>
-    </BuilderRow>
-    <BuilderRow label.translate="Ngày đăng">
-        <BuilderCheckbox dataAttributeAction="'showDate'" dataAttributeActionValue="'true'"/>
-    </BuilderRow>
-</t>
-
-<!-- ======= Snippet "Đăng ký hội viên" (nền/chiều cao dùng option chuẩn của section) ======= -->
-<t t-name="hami_blog.HamiCtaOption">
-    <t t-call="hami_blog.HamiWidthRow"/>
-</t>
-
 </templates>

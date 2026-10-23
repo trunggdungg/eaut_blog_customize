@@ -93,23 +93,6 @@ export class HamiNewsCard extends HamiFetchInteraction {
 }
 registerInteraction("hami_blog.news_card", HamiNewsCard);
 
-/** Snippet "Xem nhiều". */
-export class HamiMostViewed extends HamiFetchInteraction {
-    static selector = ".s_hami_most_viewed";
-    static endpoint = "/hami_blog/most_viewed";
-    static bodySelector = ".s_hami_most_viewed_body";
-
-    getParams() {
-        const d = this.el.dataset;
-        return {
-            blog_id: d.blogId,
-            limit: d.limit,
-            show_date: d.showDate === "true",
-        };
-    }
-}
-registerInteraction("hami_blog.most_viewed", HamiMostViewed);
-
 /** Mũi tên chuyển cột của snippet "Hoạt động HAMI". */
 export class HamiActivities extends Interaction {
     static selector = ".s_hami_activities";
