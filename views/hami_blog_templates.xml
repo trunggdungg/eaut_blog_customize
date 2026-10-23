@@ -54,29 +54,4 @@
         </div>
     </template>
 
-    <!-- Nội dung snippet "Xem nhiều": bài đầu lớn, các bài sau dạng thu nhỏ -->
-    <template id="most_viewed_body" name="HAMI: nội dung xem nhiều">
-        <t t-if="posts">
-            <t t-set="first" t-value="posts[0]"/>
-            <article class="s_hami_post s_hami_post_featured">
-                <t t-set="post" t-value="first"/>
-                <t t-call="hami_blog.post_image"/>
-                <h3 class="s_hami_post_title">
-                    <a t-att-href="first.website_url" t-out="first.name"/>
-                </h3>
-                <t t-if="show_date" t-call="hami_blog.post_date"/>
-            </article>
-            <ul t-if="len(posts) &gt; 1" class="s_hami_mv_list">
-                <li t-foreach="posts[1:]" t-as="item" class="s_hami_mv_item">
-                    <t t-set="post" t-value="item"/>
-                    <t t-call="hami_blog.post_image"/>
-                    <div class="s_hami_mv_text">
-                        <a class="s_hami_post_title" t-att-href="item.website_url" t-out="item.name"/>
-                        <t t-if="show_date" t-call="hami_blog.post_date"/>
-                    </div>
-                </li>
-            </ul>
-        </t>
-        <p t-else="" class="s_hami_empty">Chưa có bài viết nào để hiển thị.</p>
-    </template>
 </odoo>
