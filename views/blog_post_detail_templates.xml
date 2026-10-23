@@ -24,12 +24,15 @@
     <template id="opt_hami_most_viewed_display" name="HAMI: Xem nhiều"
               inherit_id="website_blog.blog_post_sidebar" active="False" priority="0">
         <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
-            <section class="hami_box mb-4">
-                <h2 class="hami_box_title">XEM NHIỀU</h2>
-                <t t-set="posts" t-value="request.env['blog.post'].hami_most_viewed(-1, 5)"/>
-                <t t-set="show_date" t-value="True"/>
-                <t t-call="hami_blog.most_viewed_body"/>
-            </section>
+            <!-- Vùng oe_structure: lưu ở lần sửa đầu tiên, sau đó chỉnh Nền/tiêu đề như khối thường.
+                 Danh sách bài nạp lúc chạy (interaction s_hami_most_viewed), không lưu cứng. -->
+            <div class="oe_structure mb-4" id="oe_structure_hami_most_viewed">
+                <section class="s_hami_most_viewed s_hami_box" data-name="Xem nhiều"
+                         data-blog-id="-1" data-limit="5" data-show-date="true">
+                    <h2 class="s_hami_box_title">XEM NHIỀU</h2>
+                    <div class="s_hami_most_viewed_body o_not_editable"/>
+                </section>
+            </div>
         </xpath>
     </template>
 

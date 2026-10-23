@@ -84,3 +84,14 @@ class HamiBlog(http.Controller):
             'viewall_label': viewall_label,
             'blog_url': self._blog_url(blog_id),
         })
+
+    @http.route('/hami_blog/most_viewed', type='http', auth='public',
+                website=True, methods=['GET'], sitemap=False)
+    def most_viewed(self, blog_id=-1, limit=5, show_date='true', **kw):
+        limit = max(1, min(_to_int(limit, 5), 20))
+        posts = request.env['blog.post'].hami_most_viewed(
+            _to_int(blog_id, -1), limit)
+        return request.render('hami_blog.most_viewed_body', {
+            'posts': posts,
+            'show_date': _to_bool(show_date),
+        })

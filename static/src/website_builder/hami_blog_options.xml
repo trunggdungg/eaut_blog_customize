@@ -115,6 +115,24 @@
     </BuilderRow>
 </t>
 
+<!-- ======= Hộp "Xem nhiều" (thanh bên trang chi tiết) ======= -->
+<t t-name="hami_blog.HamiMostViewedOption">
+    <BuilderRow label.translate="Blog nguồn">
+        <BuilderSelect dataAttributeAction="'blogId'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="'-1'">Tất cả blog</BuilderSelectItem>
+            <t t-foreach="source.blogs" t-as="blog" t-key="blog.id">
+                <BuilderSelectItem dataAttributeActionValue="`${blog.id}`" t-out="blog.name"/>
+            </t>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Số bài">
+        <BuilderNumberInput dataAttributeAction="'limit'" min="1" max="20"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Ngày đăng">
+        <BuilderCheckbox dataAttributeAction="'showDate'" dataAttributeActionValue="'true'"/>
+    </BuilderRow>
+</t>
+
 <!-- ======= Panel "Blog Page" (trang chi tiết bài): thêm công tắc bật/tắt ======= -->
 <t t-inherit="website_blog.BlogPageOption" t-inherit-mode="extension">
     <!-- Trong nhóm "Thanh bên" (chỉ hiện khi đã bật Thanh bên) -->

@@ -3,8 +3,8 @@
 // ============================================================================
 .s_hami_activities,
 .s_hami_news_blocks,
-.hami_cta,
-.hami_box {
+.s_hami_most_viewed,
+.hami_cta {
     --hami-red: #E5282B;
     --hami-red-dark: #c41f22;
     --hami-ink: #1a1a1a;
@@ -166,7 +166,15 @@
     gap: .9rem;
     padding: .9rem 0;
     border-top: 1px solid var(--hami-line);
-    .s_hami_img { flex: 0 0 100px; aspect-ratio: 4 / 3; border-radius: 4px; }
+    .s_hami_img {
+        flex: 0 0 100px;
+        width: 100px;
+        aspect-ratio: 4 / 3;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #f1f1f1;
+        img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    }
     .s_hami_mv_text { min-width: 0; }
     .s_hami_post_title {
         display: -webkit-box;
@@ -182,11 +190,11 @@
     }
 }
 
-.hami_box {
+.s_hami_box {
     border: 1px solid var(--hami-line);
     border-radius: var(--hami-radius);
     padding: 1.5rem;
-    .hami_box_title { color: var(--hami-red); font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem; }
+    .s_hami_box_title { color: var(--hami-red); font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem; }
 }
 .hami_cta {
     border-radius: var(--hami-radius);
