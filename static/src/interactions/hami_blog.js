@@ -136,17 +136,3 @@ export class HamiActivities extends Interaction {
     }
 }
 registerInteraction("hami_blog.activities", HamiActivities);
-
-/** Nút in ở cột chia sẻ của trang chi tiết bài viết. */
-export class HamiPrint extends Interaction {
-    static selector = ".hami_share_print";
-    dynamicContent = {
-        _root: {
-            "t-on-click": (ev) => {
-                ev.preventDefault();
-                window.print();
-            },
-        },
-    };
-}
-registry.category("public.interactions").add("hami_blog.print", HamiPrint);

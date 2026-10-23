@@ -126,11 +126,6 @@
             <BuilderCheckbox actionParam="{views: ['hami_blog.opt_hami_most_viewed_display']}"/>
         </BuilderRow>
     </xpath>
-    <xpath expr="//t[contains(@t-if, 'blog_post_sidebar_opt')]" position="after">
-        <BuilderRow label.translate="Cột chia sẻ (HAMI)">
-            <BuilderCheckbox actionParam="{views: ['hami_blog.opt_hami_share_column']}"/>
-        </BuilderRow>
-    </xpath>
 </t>
 
 </templates>
