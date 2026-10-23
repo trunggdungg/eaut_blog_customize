@@ -2,7 +2,10 @@
 // HAMI Blog: giao diện tin tức. Đổi màu chủ đạo ở một chỗ duy nhất (biến CSS).
 // ============================================================================
 .s_hami_activities,
-.s_hami_news_blocks {
+.s_hami_news_blocks,
+.hami_cta,
+.hami_box,
+.hami_share {
     --hami-red: #E5282B;
     --hami-red-dark: #c41f22;
     --hami-ink: #1a1a1a;
@@ -155,4 +158,95 @@
 :not(.row) > .s_hami_news_card[class*="col-md-"] {
     margin-left: auto;
     margin-right: auto;
+}
+
+// ---- Trang chi tiết bài: khối bên cạnh (bật/tắt trong panel Blog Page) ----
+.s_hami_mv_list { list-style: none; margin: 1rem 0 0; padding: 0; }
+.s_hami_mv_item {
+    display: flex;
+    gap: .9rem;
+    padding: .9rem 0;
+    border-top: 1px solid var(--hami-line);
+    .s_hami_img { flex: 0 0 100px; aspect-ratio: 4 / 3; border-radius: 4px; }
+    .s_hami_mv_text { min-width: 0; }
+    .s_hami_post_title {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        font-size: .9rem;
+        font-weight: 600;
+        color: var(--hami-ink);
+        text-decoration: none;
+        text-transform: none;
+        &:hover { color: var(--hami-red); }
+    }
+}
+
+.hami_box {
+    border: 1px solid var(--hami-line);
+    border-radius: var(--hami-radius);
+    padding: 1.5rem;
+    .hami_box_title { color: var(--hami-red); font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem; }
+}
+.hami_cta {
+    background: var(--hami-red);
+    color: #fff;
+    border-radius: var(--hami-radius);
+    padding: 1.75rem;
+    .hami_cta_eyebrow { font-size: .9rem; margin-bottom: .25rem; }
+    .hami_cta_title {
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.5rem;
+        padding-bottom: .75rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #fff;
+        display: inline-block;
+    }
+    .hami_cta_btn {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        background: #fff;
+        color: var(--hami-red);
+        font-weight: 700;
+        padding: .6rem 1.1rem;
+        border-radius: 4px;
+        text-decoration: none;
+        &:hover { background: #fdeaea; }
+    }
+}
+// Cột chia sẻ dọc: nằm ngoài lề trái của nội dung (màn hình rộng), hàng ngang
+// phía trên bài khi màn hình hẹp.
+.hami_share {
+    display: flex;
+    flex-direction: row;
+    gap: .6rem;
+    margin-bottom: 1rem;
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 1px solid var(--hami-line);
+        border-radius: 50%;
+        color: var(--hami-ink);
+        font-size: .95rem;
+        font-weight: 700;
+        text-decoration: none;
+        &:hover { background: var(--hami-red); border-color: var(--hami-red); color: #fff; }
+    }
+    .hami_share_zalo { font-size: .7rem; }
+    @media (min-width: 1200px) {
+        float: left;
+        position: sticky;
+        top: 7rem;
+        flex-direction: column;
+        margin: 0 1rem 0 -3.5rem;
+    }
+}
+@media print {
+    .hami_share { display: none !important; }
 }

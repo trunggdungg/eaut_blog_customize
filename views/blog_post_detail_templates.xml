@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Các khối bên cạnh bài viết. Mặc định TẮT; admin bật/tắt trong
+         editor > Kiểu > "Blog Page" (xem hami_blog_options.xml). -->
+
+    <!-- Khối đỏ "Đăng ký hội viên" trong thanh bên (cần bật "Thanh bên") -->
+    <template id="opt_hami_cta_display" name="HAMI: Đăng ký hội viên"
+              inherit_id="website_blog.blog_post_sidebar" active="False" priority="0">
+        <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
+            <div class="hami_cta mb-4">
+                <p class="hami_cta_eyebrow">Hội viên HAMI</p>
+                <h2 class="hami_cta_title">ĐĂNG KÝ HỘI VIÊN</h2>
+                <p>Kết nối cùng cộng đồng doanh nghiệp sản xuất sản phẩm công nghiệp chủ lực Hà Nội.</p>
+                <a href="/dang-ky-hoi-vien" class="hami_cta_btn">Đăng ký ngay <i class="fa fa-angle-right" role="img" aria-hidden="true"/></a>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Hộp "Xem nhiều" trong thanh bên (cần bật "Thanh bên") -->
+    <template id="opt_hami_most_viewed_display" name="HAMI: Xem nhiều"
+              inherit_id="website_blog.blog_post_sidebar" active="False" priority="0">
+        <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
+            <section class="hami_box mb-4">
+                <h2 class="hami_box_title">XEM NHIỀU</h2>
+                <t t-set="posts" t-value="request.env['blog.post'].hami_most_viewed(-1, 5)"/>
+                <t t-set="show_date" t-value="True"/>
+                <t t-call="hami_blog.most_viewed_body"/>
+            </section>
+        </xpath>
+    </template>
+
+    <!-- Cột chia sẻ dọc bên trái nội dung bài -->
+    <template id="opt_hami_share_column" name="HAMI: cột chia sẻ"
+              inherit_id="website_blog.blog_post_content" active="False">
+        <xpath expr="//div[@t-field='blog_post.content']" position="before">
+            <t t-set="hami_share" t-value="blog_post.hami_share_links(request.httprequest.base_url)"/>
+            <div class="hami_share o_not_editable css_editable_mode_hidden">
+                <a t-att-href="hami_share['facebook']" target="_blank" rel="noopener"
+                   aria-label="Chia sẻ Facebook" title="Chia sẻ Facebook">
+                    <i class="fa fa-facebook" role="img" aria-hidden="true"/>
+                </a>
+                <a t-att-href="hami_share['zalo']" target="_blank" rel="noopener"
+                   aria-label="Chia sẻ Zalo" title="Chia sẻ Zalo" class="hami_share_zalo">Zalo</a>
+                <a href="#" class="hami_share_print" aria-label="In bài viết" title="In bài viết">
+                    <i class="fa fa-print" role="img" aria-hidden="true"/>
+                </a>
+                <a t-att-href="hami_share['email']" aria-label="Gửi email" title="Gửi email">
+                    <i class="fa fa-envelope" role="img" aria-hidden="true"/>
+                </a>
+            </div>
+        </xpath>
+    </template>
+</odoo>
