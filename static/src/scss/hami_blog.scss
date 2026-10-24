@@ -4,8 +4,8 @@
 .s_hami_activities,
 .s_hami_news_blocks,
 .s_hami_most_viewed,
-.hami_cta,
-.hami_post_style {
+
+.hami_cta {
   --hami-red: #E5282B;
   --hami-red-dark: #c41f22;
   --hami-ink: #1a1a1a;
@@ -222,156 +222,165 @@
 }
 
 :not(.row) > .s_hami_news_card[class*="col-md-"] {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
 // ---- Trang chi tiết bài: khối bên cạnh (bật/tắt trong panel Blog Page) ----
-.s_hami_mv_list { list-style: none; margin: 1rem 0 0; padding: 0; }
+.s_hami_mv_list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
 .s_hami_mv_item {
-    display: flex;
-    gap: .9rem;
-    padding: .9rem 0;
-    border-top: 1px solid var(--hami-line);
-    .s_hami_img {
-        flex: 0 0 100px;
-        width: 100px;
-        aspect-ratio: 4 / 3;
-        border-radius: 4px;
-        overflow: hidden;
-        background: #f1f1f1;
-        img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  display: flex;
+  gap: .9rem;
+  padding: .9rem 0;
+  border-top: 1px solid var(--hami-line);
+
+  .s_hami_img {
+    flex: 0 0 100px;
+    width: 100px;
+    aspect-ratio: 4 / 3;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #f1f1f1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    .s_hami_mv_text { min-width: 0; }
-    .s_hami_post_title {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-        overflow: hidden;
-        font-size: .9rem;
-        font-weight: 600;
-        color: var(--hami-ink);
-        text-decoration: none;
-        text-transform: none;
-        &:hover { color: var(--hami-red); }
+  }
+
+  .s_hami_mv_text {
+    min-width: 0;
+  }
+
+  .s_hami_post_title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    font-size: .9rem;
+    font-weight: 600;
+    color: var(--hami-ink);
+    text-decoration: none;
+    text-transform: none;
+
+    &:hover {
+      color: var(--hami-red);
     }
+  }
 }
 
 .s_hami_box {
-    border: 1px solid var(--hami-line);
-    border-radius: var(--hami-radius);
-    padding: 1.5rem;
-      .s_hami_box_title {
-        color: var(--hami-red);
-        font-size: 1rem;
-        font-weight: 700;
-        padding-bottom: .75rem;
-        margin-bottom: 1rem;
-        border-bottom: 1px solid var(--hami-line);
-    }
+  border: 1px solid var(--hami-line);
+  border-radius: var(--hami-radius);
+  padding: 1.5rem;
+
+  .s_hami_box_title {
+    color: var(--hami-red);
+    font-size: 1rem;
+    font-weight: 700;
+    padding-bottom: .75rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--hami-line);
+  }
 }
+
 .hami_cta {
 
-    border-radius: var(--hami-radius);
-    padding: 1.25rem;
-    // Mặc định: đỏ chuyển sắc, chữ trắng, đổ bóng. Khi admin chọn nền riêng
-    // (Nền trong panel Kiểu, kể cả gradient) thì builder tự đặt, không bị ghi đè.
-      // Màu đỏ/chữ trắng chỉ là mặc định: khi admin chọn nền riêng (Nền trong
-    // panel Kiểu) thì builder tự đặt màu, không bị ghi đè ở đây.
-    &:not([style*="background"]):not([class*="bg-"]):not([class*="o_cc"]) {
-      background-image: linear-gradient(135deg, #E5282B 0%, #b81d20 100%);
-        color: #fff;
-             box-shadow: 0 6px 16px rgba(229, 40, 43, .25);
-    }
-    .hami_cta_eyebrow {
-        font-size: .7rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: .02em;
-        margin-bottom: .35rem;
-    }
+  border-radius: var(--hami-radius);
+  padding: 1.25rem;
 
-    .hami_cta_title {
-        position: relative;
-        display: block;
-       color: inherit;
-         font-size: 1.1rem;
-        font-weight: 700;
-             padding-bottom: .6rem;
-        margin-bottom: .9rem;
-        &::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 60px;
-            height: 2px;
-            background: currentColor;
-        }
-    }
-     p { font-size: .875rem; }
-    .hami_cta_btn {
-        display: inline-flex;
-        align-items: center;
-             gap: .4rem;
-        background: #fff;
-        color: var(--hami-red);
-        font-weight: 700;
-        padding: .6rem 1.1rem;
-         font-size: .8rem;
-        border-radius: 4px;
-              padding: .45rem .9rem;
-        text-decoration: none;
-        &:hover { background: #fdeaea; }
-    }
-}
+  .hami_cta_eyebrow {
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    margin-bottom: .35rem;
+  }
 
-
-// ---- Kiểu HAMI cho trang chi tiết (bật trong panel Blog Page) --------------
-.hami_post_style {
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-
-    // Tiêu đề + tiêu đề phụ: đỏ, in hoa, căn trái như site mẫu.
-    .o_wblog_post_title { text-align: left; }
-    .o_wblog_post_name {
-        color: var(--hami-red);
-        font-weight: 700;
-        text-transform: uppercase;
-        line-height: 1.25;
-        font-size: calc(1.3rem + .8vw);
-        @media (min-width: 1200px) { font-size: 2rem; }
-    }
-    .o_wblog_post_subtitle {
-        color: var(--hami-muted);
-        font-size: 1rem;
-        font-weight: 400;
-        text-transform: none;
-    }
-    #o_wblog_post_info { font-size: .85rem; }
-    .breadcrumb a { color: var(--hami-red); text-decoration: none; }
-
-    // Đoạn đầu của nội dung = đoạn dẫn: nền đỏ nhạt, viền trái đỏ.
-    .o_wblog_post_content_field > p:first-child {
-        background: #fdeaea;
-        border-left: 4px solid var(--hami-red);
-        border-radius: 0 var(--hami-radius) var(--hami-radius) 0;
-        padding: 1rem 1.25rem;
-        font-weight: 500;
-    }
-}
-// Ảnh bìa đầy đủ: <img> tự theo tỉ lệ gốc; ẩn khi chưa bật Kiểu HAMI.
-.hami_post_cover_img { display: none; }
-.hami_post_style .hami_post_cover_img {
+  .hami_cta_title {
+    position: relative;
     display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--hami-radius);
-    margin-bottom: 1.5rem;
+    color: inherit;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding-bottom: .6rem;
+    margin-bottom: .9rem;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 60px;
+      height: 2px;
+      background: currentColor;
+    }
+  }
+
+  p {
+    font-size: .875rem;
+  }
+
+  .hami_cta_btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    color: inherit;
+    font-weight: 700;
+    padding: .6rem 1.1rem;
+    border: 1px solid currentColor;
+    font-size: .8rem;
+    border-radius: 4px;
+    padding: .45rem .9rem;
+    text-decoration: none;
+
+  }
 }
-.hami_post_style .o_wblog_post_page_cover_regular { display: none; }
-// Trong editor: hiện lại ảnh bìa gốc (để đổi ảnh), ẩn <img> trùng lặp.
-.editor_enable .hami_post_style {
-    .o_wblog_post_page_cover_regular { display: block !important; }
-    .hami_post_cover_img { display: none !important; }
+// ---- Ảnh bìa đầy đủ trang chi tiết (bật trong panel Blog Page) -------------
+// <img> tự theo tỉ lệ gốc, quyết định chiều cao khung; khối ảnh bìa gốc của Odoo
+// (background cố định chiều cao) đặt chồng lên và trong suốt để vẫn bấm đổi ảnh được.
+.hami_post_cover_img { display: none; }
+.hami_post_cover_wrap.hami_has_cover {
+    position: relative;
+    margin-bottom: 1.5rem;
+    .hami_post_cover_img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+    .o_wblog_post_page_cover_regular {
+        position: absolute;
+        inset: 0;
+        height: 100% !important;
+        margin: 0 !important;
+        opacity: 0;
+    }
+}
+
+// ---- Độ rộng thanh bên trang chi tiết ---------------------------------------
+// Chỉ áp khi thanh bên có khối HAMI (CTA / Xem nhiều). Cột cố định 390px
+// (đổi ở biến --hami-sidebar-width), cột nội dung tự co phần còn lại.
+@media (min-width: 992px) {
+    #o_wblog_post_sidebar_col:has(.hami_cta, .s_hami_most_viewed) {
+        --hami-sidebar-width: 390px;
+        flex: 0 0 var(--hami-sidebar-width);
+             flex-grow: 0 !important;
+        width: var(--hami-sidebar-width);
+        max-width: 100%;
+    }
+    // Cột nội dung lấy phần còn lại (flex-basis thắng width 75% của Odoo).
+    #o_wblog_post_content:has(~ #o_wblog_post_sidebar_col .hami_cta, ~ #o_wblog_post_sidebar_col .s_hami_most_viewed) {
+        flex: 1 1 0;
+        width: auto;
+        min-width: 0;
+    }
 }
