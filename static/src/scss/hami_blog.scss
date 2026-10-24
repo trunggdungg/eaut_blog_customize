@@ -276,6 +276,9 @@
     #o_wblog_post_sidebar_col:has(.hami_cta, .s_hami_most_viewed) {
         --hami-sidebar-width: 390px;
         flex: 0 0 var(--hami-sidebar-width);
+        // Bootstrap `.flex-grow-1` (có !important) đang nằm trên cột này nên phải
+        // ghi đè, nếu không cột sẽ phình ra chia đều phần dư với cột nội dung.
+        flex-grow: 0 !important;
         width: var(--hami-sidebar-width);
         max-width: 100%;
     }
