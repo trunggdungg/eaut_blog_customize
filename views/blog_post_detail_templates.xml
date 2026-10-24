@@ -3,36 +3,6 @@
     <!-- Các khối bên cạnh bài viết. Mặc định TẮT; admin bật/tắt trong
          editor > Kiểu > "Blog Page" (xem hami_blog_options.xml). -->
 
-    <!-- Kiểu HAMI cho trang chi tiết: gắn class `hami_post_style` vào 2 section chính,
-         toàn bộ CSS nằm trong hami_blog.scss và chỉ áp khi có class này. -->
-    <template id="opt_hami_post_style" name="HAMI: kiểu trang chi tiết"
-              inherit_id="website_blog.blog_post_complete" active="False">
-        <xpath expr="//section[@id='o_wblog_post_top']" position="attributes">
-            <attribute name="class" add="hami_post_style" separator=" "/>
-        </xpath>
-        <xpath expr="//section[@id='o_wblog_post_main']" position="attributes">
-            <attribute name="class" add="hami_post_style" separator=" "/>
-        </xpath>
-    </template>
-
-    <!-- Ảnh bìa hiển thị 100% theo tỉ lệ gốc (chỉ khi dùng layout "Title Above Cover"
-         và bật Kiểu HAMI). Ảnh bìa nền gốc của Odoo bị cắt theo chiều cao cố định nên
-         được đặt chồng lên <img>, trong suốt: vẫn bấm chọn được trong editor để đổi ảnh. -->
-    <template id="opt_hami_post_cover_full" name="HAMI: ảnh bìa đầy đủ"
-              inherit_id="website_blog.opt_blog_post_regular_cover" active="True">
-        <xpath expr="//div[@id='title']/t[@t-call='website.record_cover']" position="replace">
-            <div t-attf-class="hami_post_cover_wrap #{blog_post.hami_cover_url and 'hami_has_cover' or ''}">
-                <img t-if="blog_post.hami_cover_url" class="hami_post_cover_img"
-                     t-att-src="blog_post.hami_cover_url" t-att-alt="blog_post.name"/>
-                <t t-call="website.record_cover">
-                    <t t-set="_record" t-value="blog_post"/>
-                    <t t-set="additionnal_classes" t-value="'o_wblog_post_page_cover o_wblog_post_page_cover_regular rounded shadow overflow-hidden'"/>
-                    <t t-set="use_size" t-value="True"/>
-                </t>
-            </div>
-        </xpath>
-    </template>
-
     <!-- Khối đỏ "Đăng ký hội viên" trong thanh bên (cần bật "Thanh bên") -->
     <template id="opt_hami_cta_display" name="HAMI: Đăng ký hội viên"
               inherit_id="website_blog.blog_post_sidebar" active="False" priority="0">

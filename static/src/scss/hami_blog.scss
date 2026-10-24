@@ -4,8 +4,7 @@
 .s_hami_activities,
 .s_hami_news_blocks,
 .s_hami_most_viewed,
-.hami_cta,
-.hami_post_style {
+.hami_cta {
     --hami-red: #E5282B;
     --hami-red-dark: #c41f22;
     --hami-ink: #1a1a1a;
@@ -247,57 +246,4 @@
         text-decoration: none;
     }
 
-}
-
-// ---- Kiểu HAMI cho trang chi tiết (bật trong panel Blog Page) --------------
-.hami_post_style {
-    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-
-    // Tiêu đề + tiêu đề phụ: đỏ, in hoa, căn trái như site mẫu.
-    .o_wblog_post_title { text-align: left; }
-    .o_wblog_post_name {
-        color: var(--hami-red);
-        font-weight: 700;
-        text-transform: uppercase;
-        line-height: 1.25;
-        font-size: calc(1.3rem + .8vw);
-        @media (min-width: 1200px) { font-size: 2rem; }
-    }
-    .o_wblog_post_subtitle {
-        color: var(--hami-muted);
-        font-size: 1rem;
-        font-weight: 400;
-        text-transform: none;
-    }
-    #o_wblog_post_info { font-size: .85rem; }
-    .breadcrumb a { color: var(--hami-red); text-decoration: none; }
-
-    // Đoạn đầu của nội dung = đoạn dẫn: nền đỏ nhạt, viền trái đỏ.
-    .o_wblog_post_content_field > p:first-child {
-        background: #fdeaea;
-        border-left: 4px solid var(--hami-red);
-        border-radius: 0 var(--hami-radius) var(--hami-radius) 0;
-        padding: 1rem 1.25rem;
-        font-weight: 500;
-    }
-}
-// Ảnh bìa đầy đủ: <img> tự theo tỉ lệ gốc, quyết định chiều cao khung; khối ảnh bìa
-// gốc của Odoo (background cố định chiều cao) đặt chồng lên và trong suốt.
-.hami_post_cover_img { display: none; }
-.hami_post_style .hami_post_cover_wrap.hami_has_cover {
-    position: relative;
-    margin-bottom: 1.5rem;
-    .hami_post_cover_img {
-        display: block;
-        width: 100%;
-        height: auto;
-        border-radius: var(--hami-radius);
-    }
-    .o_wblog_post_page_cover_regular {
-        position: absolute;
-        inset: 0;
-        height: 100% !important;
-        margin: 0 !important;
-        opacity: 0;
-    }
 }
