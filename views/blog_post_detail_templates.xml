@@ -30,9 +30,11 @@
         </xpath>
     </template>
 
-    <!-- Khối đỏ "Đăng ký hội viên" trong thanh bên (cần bật "Thanh bên") -->
+    <!-- Thứ tự trong thanh bên: priority CTA (-2) < Xem nhiều (-1) < các khối gốc của Odoo (>= 1),
+         nên không phụ thuộc thứ tự admin bật công tắc. -->
+    <!-- Khối "Đăng ký hội viên" trong thanh bên (cần bật "Thanh bên") -->
     <template id="opt_company_cta_display" name="Company: Đăng ký hội viên"
-              inherit_id="website_blog.blog_post_sidebar" active="False" priority="0">
+              inherit_id="website_blog.blog_post_sidebar" active="False" priority="-2">
         <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
             <!-- Vùng oe_structure: nội dung mặc định bên dưới được lưu vào trang ở lần
                  sửa đầu tiên, sau đó admin chỉnh Nền/chữ/nút như một khối thường. -->
@@ -49,7 +51,7 @@
 
     <!-- Hộp "Xem nhiều" trong thanh bên (cần bật "Thanh bên") -->
     <template id="opt_company_most_viewed_display" name="Company: Xem nhiều"
-              inherit_id="website_blog.blog_post_sidebar" active="False" priority="0">
+              inherit_id="website_blog.blog_post_sidebar" active="False" priority="-1">
         <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
             <!-- Vùng oe_structure: lưu ở lần sửa đầu tiên, sau đó chỉnh Nền/tiêu đề như khối thường.
                  Danh sách bài nạp lúc chạy (interaction s_company_most_viewed), không lưu cứng. -->
