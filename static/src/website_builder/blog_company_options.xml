@@ -2,7 +2,7 @@
 <templates xml:space="preserve">
 
 <!-- Độ rộng bằng lớp col-md-*: trong lưới (.row) là cột, đứng riêng thì là % bề ngang -->
-<t t-name="hami_blog.HamiWidthRow">
+<t t-name="blog_company.CompanyWidthRow">
     <BuilderRow label.translate="Độ rộng">
         <BuilderSelect>
             <BuilderSelectItem classAction="''">Tự động</BuilderSelectItem>
@@ -14,17 +14,17 @@
     </BuilderRow>
 </t>
 
-<!-- ======= Snippet "Hoạt động HAMI" ======= -->
-<t t-name="hami_blog.HamiActivitiesOption">
+<!-- ======= Snippet "Hoạt động công ty" ======= -->
+<t t-name="blog_company.CompanyActivitiesOption">
     <BuilderRow label.translate="Cột">
         <BuilderButton type="'success'" action="'addItem'"
-                       actionParam="'.s_hami_col:last-of-type'" preview="false">
+                       actionParam="'.s_company_col:last-of-type'" preview="false">
             Thêm cột
         </BuilderButton>
     </BuilderRow>
 </t>
 
-<t t-name="hami_blog.HamiColumnOption">
+<t t-name="blog_company.CompanyColumnOption">
     <BuilderRow label.translate="Blog nguồn">
         <BuilderSelect dataAttributeAction="'blogId'" preview="false">
             <BuilderSelectItem dataAttributeActionValue="'-1'">Tất cả blog</BuilderSelectItem>
@@ -59,14 +59,14 @@
 </t>
 
 <!-- ======= Snippet "Tin tức theo thể loại" ======= -->
-<t t-name="hami_blog.HamiNewsBlocksOption">
+<t t-name="blog_company.CompanyNewsBlocksOption">
     <BuilderRow label.translate="Card">
         <BuilderButton type="'success'" action="'addItem'"
-                       actionParam="'.s_hami_news_card:last-of-type'" preview="false">
+                       actionParam="'.s_company_news_card:last-of-type'" preview="false">
             Thêm thể loại
         </BuilderButton>
     </BuilderRow>
-    <BuilderContext applyTo="'.s_hami_news_grid'">
+    <BuilderContext applyTo="'.s_company_news_grid'">
         <BuilderRow label.translate="Số card mỗi hàng">
             <BuilderSelect>
                 <BuilderSelectItem classAction="'row-cols-md-1'">1</BuilderSelectItem>
@@ -77,8 +77,8 @@
     </BuilderContext>
 </t>
 
-<t t-name="hami_blog.HamiNewsCardOption">
-    <t t-call="hami_blog.HamiWidthRow"/>
+<t t-name="blog_company.CompanyNewsCardOption">
+    <t t-call="blog_company.CompanyWidthRow"/>
     <BuilderRow label.translate="Blog nguồn">
         <BuilderSelect dataAttributeAction="'blogId'" preview="false">
             <BuilderSelectItem dataAttributeActionValue="'-1'">Tất cả blog</BuilderSelectItem>
@@ -116,7 +116,7 @@
 </t>
 
 <!-- ======= Hộp "Xem nhiều" (thanh bên trang chi tiết) ======= -->
-<t t-name="hami_blog.HamiMostViewedOption">
+<t t-name="blog_company.CompanyMostViewedOption">
     <BuilderRow label.translate="Blog nguồn">
         <BuilderSelect dataAttributeAction="'blogId'" preview="false">
             <BuilderSelectItem dataAttributeActionValue="'-1'">Tất cả blog</BuilderSelectItem>
@@ -137,16 +137,16 @@
 <t t-inherit="website_blog.BlogPageOption" t-inherit-mode="extension">
     <!-- Trong nhóm "Thanh bên" (chỉ hiện khi đã bật Thanh bên) -->
     <xpath expr="//BuilderRow[*[@id=&quot;'blog_post_sidebar_opt'&quot;]]" position="before">
-        <BuilderRow label.translate="Ảnh bìa đầy đủ (HAMI)">
-            <BuilderCheckbox actionParam="{views: ['hami_blog.opt_hami_post_cover_full', 'hami_blog.opt_hami_post_cover_content']}"/>
+        <BuilderRow label.translate="Ảnh bìa đầy đủ">
+            <BuilderCheckbox actionParam="{views: ['blog_company.opt_company_post_cover_full', 'blog_company.opt_company_post_cover_content']}"/>
         </BuilderRow>
     </xpath>
     <xpath expr="//t[contains(@t-if, 'blog_post_sidebar_opt')]" position="inside">
-        <BuilderRow label.translate="Đăng ký hội viên (HAMI)" level="1">
-            <BuilderCheckbox actionParam="{views: ['hami_blog.opt_hami_cta_display']}"/>
+        <BuilderRow label.translate="Đăng ký hội viên" level="1">
+            <BuilderCheckbox actionParam="{views: ['blog_company.opt_company_cta_display']}"/>
         </BuilderRow>
-        <BuilderRow label.translate="Xem nhiều (HAMI)" level="1">
-            <BuilderCheckbox actionParam="{views: ['hami_blog.opt_hami_most_viewed_display']}"/>
+        <BuilderRow label.translate="Xem nhiều" level="1">
+            <BuilderCheckbox actionParam="{views: ['blog_company.opt_company_most_viewed_display']}"/>
         </BuilderRow>
     </xpath>
 </t>

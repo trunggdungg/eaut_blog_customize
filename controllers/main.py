@@ -14,8 +14,8 @@ def _to_bool(value):
     return str(value).lower() in ('1', 'true', 'yes')
 
 
-class HamiBlog(http.Controller):
-    """Trả về HTML (đã render bằng QWeb) cho các snippet động của HAMI."""
+class CompanyBlog(http.Controller):
+    """Trả về HTML (đã render bằng QWeb) cho các snippet động của blog_company."""
 
     # ------------------------------------------------------------------
     # Helpers
@@ -46,22 +46,22 @@ class HamiBlog(http.Controller):
     # ------------------------------------------------------------------
     # Routes
     # ------------------------------------------------------------------
-    @http.route('/hami_blog/column', type='http', auth='public',
+    @http.route('/blog_company/column', type='http', auth='public',
                 website=True, methods=['GET'], sitemap=False)
     def column(self, blog_id=-1, mode='latest', post_id=0, show_image='true',
                show_date='true', show_teaser='false', **kw):
         Post = request.env['blog.post']
         blog_id = _to_int(blog_id, -1)
         post = self._pick_post(
-            Post._hami_published_domain(blog_id), mode, _to_int(post_id))
-        return request.render('hami_blog.column_body', {
+            Post._company_published_domain(blog_id), mode, _to_int(post_id))
+        return request.render('blog_company.column_body', {
             'post': post,
             'show_image': _to_bool(show_image),
             'show_date': _to_bool(show_date),
             'show_teaser': _to_bool(show_teaser),
         })
 
-    @http.route('/hami_blog/category', type='http', auth='public',
+    @http.route('/blog_company/category', type='http', auth='public',
                 website=True, methods=['GET'], sitemap=False)
     def category(self, blog_id=-1, mode='latest', post_id=0, limit=3,
                  show_image='true', show_date='true',
@@ -69,14 +69,14 @@ class HamiBlog(http.Controller):
         Post = request.env['blog.post']
         blog_id = _to_int(blog_id, -1)
         limit = max(0, min(_to_int(limit, 3), 20))
-        domain = Post._hami_published_domain(blog_id)
+        domain = Post._company_published_domain(blog_id)
         featured = self._pick_post(domain, mode, _to_int(post_id))
         others = Post
         if featured and limit:
             others = Post.search(
                 domain + [('id', '!=', featured.id)],
                 order='post_date desc, id desc', limit=limit)
-        return request.render('hami_blog.category_body', {
+        return request.render('blog_company.category_body', {
             'featured': featured,
             'others': others,
             'show_image': _to_bool(show_image),
@@ -85,13 +85,13 @@ class HamiBlog(http.Controller):
             'blog_url': self._blog_url(blog_id),
         })
 
-    @http.route('/hami_blog/most_viewed', type='http', auth='public',
+    @http.route('/blog_company/most_viewed', type='http', auth='public',
                 website=True, methods=['GET'], sitemap=False)
     def most_viewed(self, blog_id=-1, limit=5, show_date='true', **kw):
         limit = max(1, min(_to_int(limit, 5), 20))
-        posts = request.env['blog.post'].hami_most_viewed(
+        posts = request.env['blog.post'].company_most_viewed(
             _to_int(blog_id, -1), limit)
-        return request.render('hami_blog.most_viewed_body', {
+        return request.render('blog_company.most_viewed_body', {
             'posts': posts,
             'show_date': _to_bool(show_date),
         })

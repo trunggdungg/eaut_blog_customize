@@ -5,7 +5,7 @@ import { registry } from "@web/core/registry";
  * Lớp nền: đọc cấu hình từ data-* của phần tử, gọi route của controller để lấy
  * HTML đã render bằng QWeb rồi đổ vào vùng nội dung (không cho sửa tay).
  */
-class HamiFetchInteraction extends Interaction {
+class CompanyFetchInteraction extends Interaction {
     static endpoint = "";
     static bodySelector = "";
 
@@ -49,14 +49,14 @@ function registerInteraction(name, InteractionClass) {
 for (const mode of ["edit", "preview"]) {
     registry
         .category(`public.interactions.${mode}`)
-        .add("hami_blog.fetch_base", { Interaction: HamiFetchInteraction, isAbstract: true });
+        .add("blog_company.fetch_base", { Interaction: CompanyFetchInteraction, isAbstract: true });
 }
 
-/** Một cột của snippet "Hoạt động HAMI". */
-export class HamiColumn extends HamiFetchInteraction {
-    static selector = ".s_hami_col";
-    static endpoint = "/hami_blog/column";
-    static bodySelector = ".s_hami_col_body";
+/** Một cột của snippet "Hoạt động công ty". */
+export class CompanyColumn extends CompanyFetchInteraction {
+    static selector = ".s_company_col";
+    static endpoint = "/blog_company/column";
+    static bodySelector = ".s_company_col_body";
 
     getParams() {
         const d = this.el.dataset;
@@ -70,13 +70,13 @@ export class HamiColumn extends HamiFetchInteraction {
         };
     }
 }
-registerInteraction("hami_blog.column", HamiColumn);
+registerInteraction("blog_company.column", CompanyColumn);
 
 /** Một card của snippet "Tin tức theo thể loại". */
-export class HamiNewsCard extends HamiFetchInteraction {
-    static selector = ".s_hami_news_card";
-    static endpoint = "/hami_blog/category";
-    static bodySelector = ".s_hami_news_body";
+export class CompanyNewsCard extends CompanyFetchInteraction {
+    static selector = ".s_company_news_card";
+    static endpoint = "/blog_company/category";
+    static bodySelector = ".s_company_news_body";
 
     getParams() {
         const d = this.el.dataset;
@@ -91,13 +91,13 @@ export class HamiNewsCard extends HamiFetchInteraction {
         };
     }
 }
-registerInteraction("hami_blog.news_card", HamiNewsCard);
+registerInteraction("blog_company.news_card", CompanyNewsCard);
 
 /** Hộp "Xem nhiều" ở thanh bên trang chi tiết bài viết. */
-export class HamiMostViewed extends HamiFetchInteraction {
-    static selector = ".s_hami_most_viewed";
-    static endpoint = "/hami_blog/most_viewed";
-    static bodySelector = ".s_hami_most_viewed_body";
+export class CompanyMostViewed extends CompanyFetchInteraction {
+    static selector = ".s_company_most_viewed";
+    static endpoint = "/blog_company/most_viewed";
+    static bodySelector = ".s_company_most_viewed_body";
 
     getParams() {
         const d = this.el.dataset;
@@ -108,21 +108,21 @@ export class HamiMostViewed extends HamiFetchInteraction {
         };
     }
 }
-registerInteraction("hami_blog.most_viewed", HamiMostViewed);
+registerInteraction("blog_company.most_viewed", CompanyMostViewed);
 
-/** Mũi tên chuyển cột của snippet "Hoạt động HAMI". */
-export class HamiActivities extends Interaction {
-    static selector = ".s_hami_activities";
+/** Mũi tên chuyển cột của snippet "Hoạt động công ty". */
+export class CompanyActivities extends Interaction {
+    static selector = ".s_company_activities";
     dynamicContent = {
-        ".s_hami_prev": {
+        ".s_company_prev": {
             "t-on-click": () => this.step(-1),
-            "t-att-class": () => ({ s_hami_arrow_hidden: !this.canScroll() || this.atStart() }),
+            "t-att-class": () => ({ s_company_arrow_hidden: !this.canScroll() || this.atStart() }),
         },
-        ".s_hami_next": {
+        ".s_company_next": {
             "t-on-click": () => this.step(1),
-            "t-att-class": () => ({ s_hami_arrow_hidden: !this.canScroll() || this.atEnd() }),
+            "t-att-class": () => ({ s_company_arrow_hidden: !this.canScroll() || this.atEnd() }),
         },
-        ".s_hami_cols": {
+        ".s_company_cols": {
             "t-on-scroll": () => {},
         },
         _window: {
@@ -131,7 +131,7 @@ export class HamiActivities extends Interaction {
     };
 
     get colsEl() {
-        return this.el.querySelector(".s_hami_cols");
+        return this.el.querySelector(".s_company_cols");
     }
     canScroll() {
         const el = this.colsEl;
@@ -145,11 +145,11 @@ export class HamiActivities extends Interaction {
         return el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
     }
     step(direction) {
-        const colEl = this.colsEl.querySelector(".s_hami_col");
+        const colEl = this.colsEl.querySelector(".s_company_col");
         if (!colEl) {
             return;
         }
         this.colsEl.scrollBy({ left: direction * colEl.getBoundingClientRect().width, behavior: "smooth" });
     }
 }
-registerInteraction("hami_blog.activities", HamiActivities);
+registerInteraction("blog_company.activities", CompanyActivities);

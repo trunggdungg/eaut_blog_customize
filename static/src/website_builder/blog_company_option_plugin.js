@@ -3,31 +3,31 @@ import { withSequence } from "@html_editor/utils/resource";
 import { SNIPPET_SPECIFIC } from "@html_builder/utils/option_sequence";
 import { registry } from "@web/core/registry";
 import {
-    HamiActivitiesOption,
-    HamiColumnOption,
-    HamiNewsBlocksOption,
-    HamiNewsCardOption,
-    HamiMostViewedOption,
-} from "./hami_blog_options";
+    CompanyActivitiesOption,
+    CompanyColumnOption,
+    CompanyNewsBlocksOption,
+    CompanyNewsCardOption,
+    CompanyMostViewedOption,
+} from "./blog_company_options";
 
-class HamiBlogOptionPlugin extends Plugin {
-    static id = "hamiBlogOption";
+class CompanyBlogOptionPlugin extends Plugin {
+    static id = "companyBlogOption";
     static shared = ["fetchBlogs", "fetchPosts"];
     /** @type {import("plugins").WebsiteResources} */
     resources = {
         builder_options: [
-            withSequence(SNIPPET_SPECIFIC, HamiActivitiesOption),
-            withSequence(SNIPPET_SPECIFIC, HamiColumnOption),
-            withSequence(SNIPPET_SPECIFIC, HamiNewsBlocksOption),
-            withSequence(SNIPPET_SPECIFIC, HamiNewsCardOption),
-            withSequence(SNIPPET_SPECIFIC, HamiMostViewedOption),
+            withSequence(SNIPPET_SPECIFIC, CompanyActivitiesOption),
+            withSequence(SNIPPET_SPECIFIC, CompanyColumnOption),
+            withSequence(SNIPPET_SPECIFIC, CompanyNewsBlocksOption),
+            withSequence(SNIPPET_SPECIFIC, CompanyNewsCardOption),
+            withSequence(SNIPPET_SPECIFIC, CompanyMostViewedOption),
         ],
-        // Cho phép kéo đổi thứ tự cột (snippet "Hoạt động HAMI"). Card của
+        // Cho phép kéo đổi thứ tự cột (snippet "Hoạt động công ty"). Card của
         // "Tin tức theo thể loại" là `.row > div` nên builder đã cho kéo sẵn.
-        is_movable_selector: { selector: ".s_hami_cols > .s_hami_col", direction: "horizontal" },
+        is_movable_selector: { selector: ".s_company_cols > .s_company_col", direction: "horizontal" },
         // Nội dung nạp lúc chạy không được lưu cứng vào trang.
         clean_for_save_handlers: ({ root }) => {
-            const bodySelector = ".s_hami_col_body, .s_hami_news_body, .s_hami_most_viewed_body";
+            const bodySelector = ".s_company_col_body, .s_company_news_body, .s_company_most_viewed_body";
             for (const bodyEl of root.querySelectorAll(bodySelector)) {
                 bodyEl.replaceChildren();
             }
@@ -70,4 +70,4 @@ class HamiBlogOptionPlugin extends Plugin {
     }
 }
 
-registry.category("website-plugins").add(HamiBlogOptionPlugin.id, HamiBlogOptionPlugin);
+registry.category("website-plugins").add(CompanyBlogOptionPlugin.id, CompanyBlogOptionPlugin);

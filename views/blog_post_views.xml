@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_blog_post_form_hami" model="ir.ui.view">
-        <field name="name">blog.post.form.hami</field>
+    <record id="view_blog_post_form_company" model="ir.ui.view">
+        <field name="name">blog.post.form.company</field>
         <field name="model">blog.post</field>
         <field name="inherit_id" ref="website_blog.view_blog_post_form"/>
         <field name="arch" type="xml">
@@ -11,8 +11,8 @@
         </field>
     </record>
 
-    <record id="view_blog_post_list_hami" model="ir.ui.view">
-        <field name="name">blog.post.list.hami</field>
+    <record id="view_blog_post_list_company" model="ir.ui.view">
+        <field name="name">blog.post.list.company</field>
         <field name="model">blog.post</field>
         <field name="inherit_id" ref="website_blog.view_blog_post_list"/>
         <field name="arch" type="xml">

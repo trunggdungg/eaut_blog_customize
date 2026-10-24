@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Các khối bên cạnh bài viết. Mặc định TẮT; admin bật/tắt trong
-         editor > Kiểu > "Blog Page" (xem hami_blog_options.xml). -->
+         editor > Kiểu > "Blog Page" (xem blog_company_options.xml). -->
 
     <!-- Ảnh bìa đầy đủ trong cột nội dung (chỉ khi dùng layout "Title Above Cover").
          Bật/tắt cùng lúc 2 view bằng một công tắc ở panel Blog Page:
@@ -9,18 +9,18 @@
          2) đặt ảnh ở đầu cột nội dung, nên thanh bên (CTA, Xem nhiều) nằm ngang hàng ảnh.
          Ảnh hiển thị bằng <img> theo tỉ lệ gốc (không bị cắt); khối ảnh bìa gốc của Odoo
          đặt chồng lên, trong suốt, để vẫn bấm đổi ảnh được trong editor. -->
-    <template id="opt_hami_post_cover_full" name="HAMI: bỏ ảnh bìa full-width"
+    <template id="opt_company_post_cover_full" name="Company: bỏ ảnh bìa full-width"
               inherit_id="website_blog.opt_blog_post_regular_cover" active="False">
         <xpath expr="//div[@id='title']/t[@t-call='website.record_cover']" position="replace"/>
     </template>
 
-    <template id="opt_hami_post_cover_content" name="HAMI: ảnh bìa trong cột nội dung"
+    <template id="opt_company_post_cover_content" name="Company: ảnh bìa trong cột nội dung"
               inherit_id="website_blog.blog_post_content" active="False">
         <xpath expr="//div[@t-field='blog_post.content']" position="before">
             <div t-if="opt_blog_post_regular_cover"
-                 t-attf-class="hami_post_cover_wrap #{blog_post.hami_cover_url and 'hami_has_cover' or ''}">
-                <img t-if="blog_post.hami_cover_url" class="hami_post_cover_img"
-                     t-att-src="blog_post.hami_cover_url" t-att-alt="blog_post.name"/>
+                 t-attf-class="company_post_cover_wrap #{blog_post.company_cover_url and 'company_has_cover' or ''}">
+                <img t-if="blog_post.company_cover_url" class="company_post_cover_img"
+                     t-att-src="blog_post.company_cover_url" t-att-alt="blog_post.name"/>
                 <t t-call="website.record_cover">
                     <t t-set="_record" t-value="blog_post"/>
                     <t t-set="additionnal_classes" t-value="'o_wblog_post_page_cover o_wblog_post_page_cover_regular rounded shadow overflow-hidden'"/>
@@ -31,33 +31,33 @@
     </template>
 
     <!-- Khối đỏ "Đăng ký hội viên" trong thanh bên (cần bật "Thanh bên") -->
-    <template id="opt_hami_cta_display" name="HAMI: Đăng ký hội viên"
+    <template id="opt_company_cta_display" name="Company: Đăng ký hội viên"
               inherit_id="website_blog.blog_post_sidebar" active="False" priority="0">
         <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
             <!-- Vùng oe_structure: nội dung mặc định bên dưới được lưu vào trang ở lần
                  sửa đầu tiên, sau đó admin chỉnh Nền/chữ/nút như một khối thường. -->
-            <div class="oe_structure mb-4" id="oe_structure_hami_cta">
-                <section class="hami_cta s_hami_cta" data-name="Đăng ký hội viên">
-                    <p class="hami_cta_eyebrow">Hội viên HAMI</p>
-                    <h2 class="hami_cta_title">ĐĂNG KÝ HỘI VIÊN</h2>
-                    <p>Kết nối cùng cộng đồng doanh nghiệp sản xuất sản phẩm công nghiệp chủ lực Hà Nội.</p>
-                    <a href="/dang-ky-hoi-vien" class="hami_cta_btn">Đăng ký ngay <i class="fa fa-angle-right" role="img" aria-hidden="true"/></a>
+            <div class="oe_structure mb-4" id="oe_structure_company_cta">
+                <section class="company_cta s_company_cta" data-name="Đăng ký hội viên">
+                    <p class="company_cta_eyebrow">Hội viên</p>
+                    <h2 class="company_cta_title">ĐĂNG KÝ HỘI VIÊN</h2>
+                    <p>Tham gia cộng đồng của chúng tôi để cập nhật tin tức và nhận nhiều ưu đãi.</p>
+                    <a href="/contactus" class="company_cta_btn">Đăng ký ngay <i class="fa fa-angle-right" role="img" aria-hidden="true"/></a>
                 </section>
             </div>
         </xpath>
     </template>
 
     <!-- Hộp "Xem nhiều" trong thanh bên (cần bật "Thanh bên") -->
-    <template id="opt_hami_most_viewed_display" name="HAMI: Xem nhiều"
+    <template id="opt_company_most_viewed_display" name="Company: Xem nhiều"
               inherit_id="website_blog.blog_post_sidebar" active="False" priority="0">
         <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
             <!-- Vùng oe_structure: lưu ở lần sửa đầu tiên, sau đó chỉnh Nền/tiêu đề như khối thường.
-                 Danh sách bài nạp lúc chạy (interaction s_hami_most_viewed), không lưu cứng. -->
-            <div class="oe_structure mb-4" id="oe_structure_hami_most_viewed">
-                <section class="s_hami_most_viewed s_hami_box" data-name="Xem nhiều"
+                 Danh sách bài nạp lúc chạy (interaction s_company_most_viewed), không lưu cứng. -->
+            <div class="oe_structure mb-4" id="oe_structure_company_most_viewed">
+                <section class="s_company_most_viewed s_company_box" data-name="Xem nhiều"
                          data-blog-id="-1" data-limit="5" data-show-date="true">
-                    <h2 class="s_hami_box_title">XEM NHIỀU</h2>
-                    <div class="s_hami_most_viewed_body o_not_editable"/>
+                    <h2 class="s_company_box_title">XEM NHIỀU</h2>
+                    <div class="s_company_most_viewed_body o_not_editable"/>
                 </section>
             </div>
         </xpath>
