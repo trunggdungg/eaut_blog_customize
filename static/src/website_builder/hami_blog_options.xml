@@ -115,5 +115,41 @@
         <BuilderTextInput dataAttributeAction="'viewallLabel'"/>
     </BuilderRow>
 </t>
+    <!-- ======= Hộp "Xem nhiều" (thanh bên trang chi tiết) ======= -->
+<t t-name="hami_blog.HamiMostViewedOption">
+    <BuilderRow label.translate="Blog nguồn">
+        <BuilderSelect dataAttributeAction="'blogId'" preview="false">
+            <BuilderSelectItem dataAttributeActionValue="'-1'">Tất cả blog</BuilderSelectItem>
+            <t t-foreach="source.blogs" t-as="blog" t-key="blog.id">
+                <BuilderSelectItem dataAttributeActionValue="`${blog.id}`" t-out="blog.name"/>
+            </t>
+        </BuilderSelect>
+    </BuilderRow>
+    <BuilderRow label.translate="Số bài">
+        <BuilderNumberInput dataAttributeAction="'limit'" min="1" max="20"/>
+    </BuilderRow>
+    <BuilderRow label.translate="Ngày đăng">
+        <BuilderCheckbox dataAttributeAction="'showDate'" dataAttributeActionValue="'true'"/>
+    </BuilderRow>
+</t>
+
+<!-- ======= Panel "Blog Page" (trang chi tiết bài): thêm công tắc bật/tắt ======= -->
+<t t-inherit="website_blog.BlogPageOption" t-inherit-mode="extension">
+    <!-- Trong nhóm "Thanh bên" (chỉ hiện khi đã bật Thanh bên) -->
+        <xpath expr="//BuilderRow[*[@id=&quot;'blog_post_sidebar_opt'&quot;]]" position="before">
+        <BuilderRow label.translate="Kiểu HAMI (tiêu đề, đoạn dẫn, ảnh bìa)">
+            <BuilderCheckbox actionParam="{views: ['hami_blog.opt_hami_post_style']}"/>
+        </BuilderRow>
+    </xpath>
+    <xpath expr="//t[contains(@t-if, 'blog_post_sidebar_opt')]" position="inside">
+        <BuilderRow label.translate="Đăng ký hội viên (HAMI)" level="1">
+            <BuilderCheckbox actionParam="{views: ['hami_blog.opt_hami_cta_display']}"/>
+        </BuilderRow>
+        <BuilderRow label.translate="Xem nhiều (HAMI)" level="1">
+            <BuilderCheckbox actionParam="{views: ['hami_blog.opt_hami_most_viewed_display']}"/>
+        </BuilderRow>
+    </xpath>
+
+</t>
 
 </templates>

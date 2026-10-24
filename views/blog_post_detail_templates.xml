@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Các khối bên cạnh bài viết. Mặc định TẮT; admin bật/tắt trong
+         editor > Kiểu > "Blog Page" (xem hami_blog_options.xml). -->
+ <!-- Kiểu HAMI cho trang chi tiết: gắn class `hami_post_style` vào 2 section chính,
+         toàn bộ CSS nằm trong hami_blog.scss và chỉ áp khi có class này. -->
+    <template id="opt_hami_post_style" name="HAMI: kiểu trang chi tiết"
+              inherit_id="website_blog.blog_post_complete" active="False">
+        <xpath expr="//section[@id='o_wblog_post_top']" position="attributes">
+            <attribute name="class" add="hami_post_style" separator=" "/>
+        </xpath>
+        <xpath expr="//section[@id='o_wblog_post_main']" position="attributes">
+            <attribute name="class" add="hami_post_style" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- Ảnh bìa hiển thị 100% theo tỉ lệ gốc (chỉ khi dùng layout "Title Above Cover").
+         Ảnh bìa nền gốc của Odoo bị cắt theo chiều cao cố định nên được ẩn đi khi bật
+         Kiểu HAMI (vẫn hiện trong editor để đổi ảnh). -->
+    <template id="opt_hami_post_cover_full" name="HAMI: ảnh bìa đầy đủ"
+              inherit_id="website_blog.opt_blog_post_regular_cover" active="True">
+        <xpath expr="//div[@id='title']" position="inside">
+            <img t-if="blog_post.hami_cover_url" class="hami_post_cover_img"
+                 t-att-src="blog_post.hami_cover_url" t-att-alt="blog_post.name"/>
+        </xpath>
+    </template>
+    <!-- Khối đỏ "Đăng ký hội viên" trong thanh bên (cần bật "Thanh bên") -->
+    <template id="opt_hami_cta_display" name="HAMI: Đăng ký hội viên"
+              inherit_id="website_blog.blog_post_sidebar" active="False" priority="0">
+        <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
+                   <!-- Vùng oe_structure: nội dung mặc định bên dưới được lưu vào trang ở lần
+                 sửa đầu tiên, sau đó admin chỉnh Nền/chữ/nút như một khối thường. -->
+            <div class="oe_structure mb-4" id="oe_structure_hami_cta">
+                <section class="hami_cta s_hami_cta" data-name="Đăng ký hội viên">
+                    <p class="hami_cta_eyebrow">Hội viên HAMI</p>
+                    <h2 class="hami_cta_title">ĐĂNG KÝ HỘI VIÊN</h2>
+                    <p>Kết nối cùng cộng đồng doanh nghiệp sản xuất sản phẩm công nghiệp chủ lực Hà Nội.</p>
+                    <a href="/dang-ky-hoi-vien" class="hami_cta_btn">Đăng ký ngay <i class="fa fa-angle-right" role="img" aria-hidden="true"/></a>
+                </section>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- Hộp "Xem nhiều" trong thanh bên (cần bật "Thanh bên") -->
+    <template id="opt_hami_most_viewed_display" name="HAMI: Xem nhiều"
+              inherit_id="website_blog.blog_post_sidebar" active="False" priority="0">
+        <xpath expr="//div[@id='o_wblog_post_sidebar']" position="inside">
+                      <!-- Vùng oe_structure: lưu ở lần sửa đầu tiên, sau đó chỉnh Nền/tiêu đề như khối thường.
+                 Danh sách bài nạp lúc chạy (interaction s_hami_most_viewed), không lưu cứng. -->
+            <div class="oe_structure mb-4" id="oe_structure_hami_most_viewed">
+                <section class="s_hami_most_viewed s_hami_box" data-name="Xem nhiều"
+                         data-blog-id="-1" data-limit="5" data-show-date="true">
+                    <h2 class="s_hami_box_title">XEM NHIỀU</h2>
+                    <div class="s_hami_most_viewed_body o_not_editable"/>
+                </section>
+            </div>
+        </xpath>
+    </template>
+
+
+</odoo>

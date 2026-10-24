@@ -52,3 +52,13 @@ export class HamiNewsCardOption extends HamiSourceOption {
     static selector = ".s_hami_news_card";
 }
 
+export class HamiMostViewedOption extends BaseOptionComponent {
+    static template = "hami_blog.HamiMostViewedOption";
+    static selector = ".s_hami_most_viewed";
+    static dependencies = ["hamiBlogOption"];
+
+    setup() {
+        super.setup();
+        this.source = useHamiSource(this);
+    }
+}

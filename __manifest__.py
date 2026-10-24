@@ -16,11 +16,11 @@ Mở rộng website_blog (Odoo 19):
     'data': [
         'views/blog_post_views.xml',
         'views/hami_blog_templates.xml',
-        'views/blog_page_templates.xml',
+'views/blog_post_detail_templates.xml',
         'views/snippets/snippets.xml',
         'views/snippets/s_hami_activities.xml',
         'views/snippets/s_hami_news_blocks.xml',
-        'views/snippets/s_hami_cta.xml',
+
     ],
     'assets': {
         'web.assets_frontend': [
