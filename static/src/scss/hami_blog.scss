@@ -207,13 +207,7 @@
 .hami_cta {
     border-radius: var(--hami-radius);
     padding: 1.25rem;
-    // Mặc định: đỏ chuyển sắc, chữ trắng, đổ bóng. Khi admin chọn nền riêng
-    // (Nền trong panel Kiểu, kể cả gradient) thì builder tự đặt, không bị ghi đè.
-    &:not([style*="background"]):not([class*="bg-"]):not([class*="o_cc"]) {
-        background-image: linear-gradient(135deg, #E5282B 0%, #b81d20 100%);
-        color: #fff;
-        box-shadow: 0 6px 16px rgba(229, 40, 43, .25);
-    }
+    // Chỉ giữ khung: màu nền/chữ do admin chọn trong panel Kiểu (Nền, màu chữ).
     .hami_cta_eyebrow {
         font-size: .7rem;
         font-weight: 700;
@@ -244,15 +238,15 @@
         display: inline-flex;
         align-items: center;
         gap: .4rem;
-        background: #fff;
-        color: var(--hami-red);
+        color: inherit;
         font-size: .8rem;
         font-weight: 700;
         padding: .45rem .9rem;
+        border: 1px solid currentColor;
         border-radius: 4px;
         text-decoration: none;
-        &:hover { background: #fdeaea; }
     }
+
 }
 
 // ---- Kiểu HAMI cho trang chi tiết (bật trong panel Blog Page) --------------
