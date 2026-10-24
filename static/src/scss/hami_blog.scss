@@ -268,3 +268,21 @@
         opacity: 0;
     }
 }
+
+// ---- Độ rộng thanh bên trang chi tiết ---------------------------------------
+// Chỉ áp khi thanh bên có khối HAMI (CTA / Xem nhiều). Cột cố định 390px
+// (đổi ở biến --hami-sidebar-width), cột nội dung tự co phần còn lại.
+@media (min-width: 992px) {
+    #o_wblog_post_sidebar_col:has(.hami_cta, .s_hami_most_viewed) {
+        --hami-sidebar-width: 390px;
+        flex: 0 0 var(--hami-sidebar-width);
+        width: var(--hami-sidebar-width);
+        max-width: 100%;
+    }
+    // Cột nội dung lấy phần còn lại (flex-basis thắng width 75% của Odoo).
+    #o_wblog_post_content:has(~ #o_wblog_post_sidebar_col .hami_cta, ~ #o_wblog_post_sidebar_col .s_hami_most_viewed) {
+        flex: 1 1 0;
+        width: auto;
+        min-width: 0;
+    }
+}
