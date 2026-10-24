@@ -15,14 +15,21 @@
         </xpath>
     </template>
 
-    <!-- Ảnh bìa hiển thị 100% theo tỉ lệ gốc (chỉ khi dùng layout "Title Above Cover").
-         Ảnh bìa nền gốc của Odoo bị cắt theo chiều cao cố định nên được ẩn đi khi bật
-         Kiểu HAMI (vẫn hiện trong editor để đổi ảnh). -->
+    <!-- Ảnh bìa hiển thị 100% theo tỉ lệ gốc (chỉ khi dùng layout "Title Above Cover"
+         và bật Kiểu HAMI). Ảnh bìa nền gốc của Odoo bị cắt theo chiều cao cố định nên
+         được đặt chồng lên <img>, trong suốt: vẫn bấm chọn được trong editor để đổi ảnh. -->
     <template id="opt_hami_post_cover_full" name="HAMI: ảnh bìa đầy đủ"
               inherit_id="website_blog.opt_blog_post_regular_cover" active="True">
-        <xpath expr="//div[@id='title']" position="inside">
-            <img t-if="blog_post.hami_cover_url" class="hami_post_cover_img"
-                 t-att-src="blog_post.hami_cover_url" t-att-alt="blog_post.name"/>
+        <xpath expr="//div[@id='title']/t[@t-call='website.record_cover']" position="replace">
+            <div t-attf-class="hami_post_cover_wrap #{blog_post.hami_cover_url and 'hami_has_cover' or ''}">
+                <img t-if="blog_post.hami_cover_url" class="hami_post_cover_img"
+                     t-att-src="blog_post.hami_cover_url" t-att-alt="blog_post.name"/>
+                <t t-call="website.record_cover">
+                    <t t-set="_record" t-value="blog_post"/>
+                    <t t-set="additionnal_classes" t-value="'o_wblog_post_page_cover o_wblog_post_page_cover_regular rounded shadow overflow-hidden'"/>
+                    <t t-set="use_size" t-value="True"/>
+                </t>
+            </div>
         </xpath>
     </template>
 

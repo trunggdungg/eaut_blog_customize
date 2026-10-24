@@ -281,18 +281,23 @@
         font-weight: 500;
     }
 }
-// Ảnh bìa đầy đủ: <img> tự theo tỉ lệ gốc; ẩn khi chưa bật Kiểu HAMI.
+// Ảnh bìa đầy đủ: <img> tự theo tỉ lệ gốc, quyết định chiều cao khung; khối ảnh bìa
+// gốc của Odoo (background cố định chiều cao) đặt chồng lên và trong suốt.
 .hami_post_cover_img { display: none; }
-.hami_post_style .hami_post_cover_img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: var(--hami-radius);
+.hami_post_style .hami_post_cover_wrap.hami_has_cover {
+    position: relative;
     margin-bottom: 1.5rem;
-}
-.hami_post_style .o_wblog_post_page_cover_regular { display: none; }
-// Trong editor: hiện lại ảnh bìa gốc (để đổi ảnh), ẩn <img> trùng lặp.
-.editor_enable .hami_post_style {
-    .o_wblog_post_page_cover_regular { display: block !important; }
-    .hami_post_cover_img { display: none !important; }
+    .hami_post_cover_img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: var(--hami-radius);
+    }
+    .o_wblog_post_page_cover_regular {
+        position: absolute;
+        inset: 0;
+        height: 100% !important;
+        margin: 0 !important;
+        opacity: 0;
+    }
 }
