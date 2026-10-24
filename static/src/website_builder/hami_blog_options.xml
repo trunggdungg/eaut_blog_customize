@@ -138,7 +138,7 @@
     <!-- Trong nhóm "Thanh bên" (chỉ hiện khi đã bật Thanh bên) -->
     <xpath expr="//BuilderRow[*[@id=&quot;'blog_post_sidebar_opt'&quot;]]" position="before">
         <BuilderRow label.translate="Ảnh bìa đầy đủ (HAMI)">
-            <BuilderCheckbox actionParam="{views: ['hami_blog.opt_hami_post_style']}"/>
+            <BuilderCheckbox actionParam="{views: ['hami_blog.opt_hami_post_cover_full', 'hami_blog.opt_hami_post_cover_content']}"/>
         </BuilderRow>
     </xpath>
     <xpath expr="//t[contains(@t-if, 'blog_post_sidebar_opt')]" position="inside">
