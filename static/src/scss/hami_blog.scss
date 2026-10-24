@@ -4,7 +4,8 @@
 .s_hami_activities,
 .s_hami_news_blocks,
 .s_hami_most_viewed,
-.hami_cta {
+.hami_cta,
+.hami_post_style {
     --hami-red: #E5282B;
     --hami-red-dark: #c41f22;
     --hami-ink: #1a1a1a;
@@ -194,37 +195,110 @@
     border: 1px solid var(--hami-line);
     border-radius: var(--hami-radius);
     padding: 1.5rem;
-    .s_hami_box_title { color: var(--hami-red); font-size: 1.25rem; font-weight: 700; margin-bottom: 1.25rem; }
+    .s_hami_box_title {
+        color: var(--hami-red);
+        font-size: 1rem;
+        font-weight: 700;
+        padding-bottom: .75rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--hami-line);
+    }
 }
 .hami_cta {
     border-radius: var(--hami-radius);
-    padding: 1.75rem;
-    // Màu đỏ/chữ trắng chỉ là mặc định: khi admin chọn nền riêng (Nền trong
-    // panel Kiểu) thì builder tự đặt màu, không bị ghi đè ở đây.
+    padding: 1.25rem;
+    // Mặc định: đỏ chuyển sắc, chữ trắng, đổ bóng. Khi admin chọn nền riêng
+    // (Nền trong panel Kiểu, kể cả gradient) thì builder tự đặt, không bị ghi đè.
     &:not([style*="background"]):not([class*="bg-"]):not([class*="o_cc"]) {
-        background-color: var(--hami-red);
+        background-image: linear-gradient(135deg, #E5282B 0%, #b81d20 100%);
         color: #fff;
+        box-shadow: 0 6px 16px rgba(229, 40, 43, .25);
     }
-    .hami_cta_eyebrow { font-size: .9rem; margin-bottom: .25rem; }
-    .hami_cta_title {
-        color: inherit;
+    .hami_cta_eyebrow {
+        font-size: .7rem;
         font-weight: 700;
-        font-size: 1.5rem;
-        padding-bottom: .75rem;
-        margin-bottom: 1rem;
-        border-bottom: 2px solid currentColor;
-        display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: .02em;
+        margin-bottom: .35rem;
     }
+    .hami_cta_title {
+        position: relative;
+        display: block;
+        color: inherit;
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding-bottom: .6rem;
+        margin-bottom: .9rem;
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 2px;
+            background: currentColor;
+        }
+    }
+    p { font-size: .875rem; }
     .hami_cta_btn {
         display: inline-flex;
         align-items: center;
-        gap: .5rem;
+        gap: .4rem;
         background: #fff;
         color: var(--hami-red);
+        font-size: .8rem;
         font-weight: 700;
-        padding: .6rem 1.1rem;
+        padding: .45rem .9rem;
         border-radius: 4px;
         text-decoration: none;
         &:hover { background: #fdeaea; }
     }
+}
+
+// ---- Kiểu HAMI cho trang chi tiết (bật trong panel Blog Page) --------------
+.hami_post_style {
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    // Tiêu đề + tiêu đề phụ: đỏ, in hoa, căn trái như site mẫu.
+    .o_wblog_post_title { text-align: left; }
+    .o_wblog_post_name {
+        color: var(--hami-red);
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 1.25;
+        font-size: calc(1.3rem + .8vw);
+        @media (min-width: 1200px) { font-size: 2rem; }
+    }
+    .o_wblog_post_subtitle {
+        color: var(--hami-muted);
+        font-size: 1rem;
+        font-weight: 400;
+        text-transform: none;
+    }
+    #o_wblog_post_info { font-size: .85rem; }
+    .breadcrumb a { color: var(--hami-red); text-decoration: none; }
+
+    // Đoạn đầu của nội dung = đoạn dẫn: nền đỏ nhạt, viền trái đỏ.
+    .o_wblog_post_content_field > p:first-child {
+        background: #fdeaea;
+        border-left: 4px solid var(--hami-red);
+        border-radius: 0 var(--hami-radius) var(--hami-radius) 0;
+        padding: 1rem 1.25rem;
+        font-weight: 500;
+    }
+}
+// Ảnh bìa đầy đủ: <img> tự theo tỉ lệ gốc; ẩn khi chưa bật Kiểu HAMI.
+.hami_post_cover_img { display: none; }
+.hami_post_style .hami_post_cover_img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--hami-radius);
+    margin-bottom: 1.5rem;
+}
+.hami_post_style .o_wblog_post_page_cover_regular { display: none; }
+// Trong editor: hiện lại ảnh bìa gốc (để đổi ảnh), ẩn <img> trùng lặp.
+.editor_enable .hami_post_style {
+    .o_wblog_post_page_cover_regular { display: block !important; }
+    .hami_post_cover_img { display: none !important; }
 }
