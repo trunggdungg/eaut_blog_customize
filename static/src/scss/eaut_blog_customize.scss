@@ -77,7 +77,7 @@
 .s_company_col {
     flex: 0 0 33.3333%;
     scroll-snap-align: start;
-    padding: 0 2rem;
+    padding: 5px 2rem;
     border-right: 1px solid var(--company-line);
     &:last-child { border-right: 0; }
     .s_company_col_title {
