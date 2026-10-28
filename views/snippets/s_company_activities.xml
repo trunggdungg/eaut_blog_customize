@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="s_company_activities" name="Hoạt động công ty">
+        <section class="s_company_activities pt48 pb48" data-snippet="s_company_activities" data-name="Hoạt động công ty">
+            <div class="container">
+                <h2 class="s_company_title text-center">HOẠT ĐỘNG</h2>
+                <div class="s_company_carousel">
+                    <button type="button" class="s_company_arrow s_company_prev oe_unremovable" aria-label="Cột trước">
+                        <i class="fa fa-angle-left" role="img" aria-hidden="true"/>
+                    </button>
+                    <div class="s_company_cols">
+                        <div class="s_company_col" data-name="Cột tin" data-blog-id="-1" data-mode="latest"
+                             data-show-image="true" data-show-date="true">
+                            <h3 class="s_company_col_title">TIN HOẠT ĐỘNG</h3>
+                            <div class="s_company_col_body o_not_editable"/>
+                        </div>
+                        <div class="s_company_col" data-name="Cột tin" data-blog-id="-1" data-mode="latest"
+                             data-show-image="true" data-show-date="true">
+                            <h3 class="s_company_col_title">TIN MỚI</h3>
+                            <div class="s_company_col_body o_not_editable"/>
+                        </div>
+                        <div class="s_company_col" data-name="Cột tin" data-blog-id="-1" data-mode="latest"
+                             data-show-image="true" data-show-date="true">
+                            <h3 class="s_company_col_title">SỰ KIỆN</h3>
+                            <div class="s_company_col_body o_not_editable"/>
+                        </div>
+                    </div>
+                    <button type="button" class="s_company_arrow s_company_next oe_unremovable" aria-label="Cột sau">
+                        <i class="fa fa-angle-right" role="img" aria-hidden="true"/>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

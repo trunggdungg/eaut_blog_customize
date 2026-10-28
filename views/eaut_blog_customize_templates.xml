@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Ảnh bìa của bài viết (hoặc khung trống nếu chưa có ảnh) -->
+    <template id="post_image" name="Company: ảnh bài viết">
+        <a t-att-href="post.website_url" class="s_company_img" t-att-aria-label="post.name" tabindex="-1">
+            <img t-if="post.company_cover_url" t-att-src="post.company_cover_url" t-att-alt="post.name" loading="lazy"/>
+        </a>
+    </template>
+
+    <template id="post_date" name="Company: ngày đăng">
+        <time class="s_company_date" t-att-datetime="post.post_date and post.post_date.date().isoformat()">
+            <i class="fa fa-calendar" role="img" aria-hidden="true"/>
+            <t t-out="post.post_date" t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}"/>
+        </time>
+    </template>
+
+    <!-- Nội dung một cột trong snippet "Hoạt động công ty" -->
+    <template id="column_body" name="Company: nội dung cột">
+        <article t-if="post" class="s_company_post">
+            <t t-if="show_image" t-call="eaut_blog_customize.post_image"/>
+            <h4 class="s_company_post_title">
+                <a t-att-href="post.website_url" t-out="post.name"/>
+            </h4>
+            <t t-if="show_date" t-call="eaut_blog_customize.post_date"/>
+            <p t-if="show_teaser and post.teaser" class="s_company_post_teaser" t-out="post.teaser"/>
+        </article>
+        <p t-else="" class="s_company_empty">Chưa có bài viết nào để hiển thị.</p>
+    </template>
+
+    <!-- Nội dung một card trong snippet "Tin tức theo thể loại" -->
+    <template id="category_body" name="Company: nội dung card thể loại">
+        <t t-if="featured">
+            <article class="s_company_post s_company_post_featured">
+                <t t-set="post" t-value="featured"/>
+                <t t-if="show_image" t-call="eaut_blog_customize.post_image"/>
+                <h3 class="s_company_post_title">
+                    <a t-att-href="featured.website_url" t-out="featured.name"/>
+                </h3>
+                <t t-if="show_date" t-call="eaut_blog_customize.post_date"/>
+            </article>
+            <ul t-if="others" class="s_company_bullets">
+                <li t-foreach="others" t-as="other">
+                    <i class="fa fa-check" role="img" aria-hidden="true"/>
+                    <a t-att-href="other.website_url" t-out="other.name"/>
+                </li>
+            </ul>
+        </t>
+        <p t-else="" class="s_company_empty">Chưa có bài viết nào để hiển thị.</p>
+        <div t-if="viewall_label" class="s_company_viewall_wrap">
+            <a class="s_company_viewall" t-att-href="blog_url">
+                <span t-out="viewall_label"/>
+                <i class="fa fa-angle-right" role="img" aria-hidden="true"/>
+            </a>
+        </div>
+    </template>
+
+    <!-- Nội dung hộp "Xem nhiều": bài đầu lớn, các bài sau dạng thu nhỏ -->
+    <template id="most_viewed_body" name="Company: nội dung xem nhiều">
+        <t t-if="posts">
+            <t t-set="first" t-value="posts[0]"/>
+            <article class="s_company_post s_company_post_featured">
+                <t t-set="post" t-value="first"/>
+                <t t-call="eaut_blog_customize.post_image"/>
+                <h3 class="s_company_post_title">
+                    <a t-att-href="first.website_url" t-out="first.name"/>
+                </h3>
+                <t t-if="show_date" t-call="eaut_blog_customize.post_date"/>
+            </article>
+            <ul t-if="len(posts) &gt; 1" class="s_company_mv_list">
+                <li t-foreach="posts[1:]" t-as="item" class="s_company_mv_item">
+                    <t t-set="post" t-value="item"/>
+                    <t t-call="eaut_blog_customize.post_image"/>
+                    <div class="s_company_mv_text">
+                        <a class="s_company_post_title" t-att-href="item.website_url" t-out="item.name"/>
+                        <t t-if="show_date" t-call="eaut_blog_customize.post_date"/>
+                    </div>
+                </li>
+            </ul>
+        </t>
+        <p t-else="" class="s_company_empty">Chưa có bài viết nào để hiển thị.</p>
+    </template>
+</odoo>

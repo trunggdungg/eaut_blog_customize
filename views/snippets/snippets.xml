@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="eaut_blog_customize_snippets" inherit_id="website.snippets" name="EAUT Blog Customize snippets">
+        <!-- Nhóm (hiện ở cột trái hộp thoại "Chèn một khối"): thuộc snippet_groups -->
+        <xpath expr="//t[@id='installed_snippets_hook']" position="after">
+            <t snippet-group="eaut_blog_customize" t-snippet="website.s_snippet_group" string="Tin tức công ty"
+               t-thumbnail="/eaut_blog_customize/static/src/img/snippets_thumbs/s_company_group.svg"/>
+        </xpath>
+        <!--
+            Các khối phải nằm trong snippet_structure. Không neo vào blog_posts_hook
+            vì website_blog đã `replace` phần tử đó (hook không còn tồn tại).
+        -->
+        <xpath expr="//snippets[@id='snippet_structure']" position="inside">
+            <t t-snippet="eaut_blog_customize.s_company_activities" string="Hoạt động công ty" group="eaut_blog_customize"
+               t-thumbnail="/eaut_blog_customize/static/src/img/snippets_thumbs/s_company_activities.svg"/>
+            <t t-snippet="eaut_blog_customize.s_company_news_blocks" string="Tin tức theo thể loại" group="eaut_blog_customize"
+               t-thumbnail="/eaut_blog_customize/static/src/img/snippets_thumbs/s_company_news_blocks.svg"/>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,291 @@
+// ============================================================================
+// EAUT Blog Customize: giao diện tin tức. Đổi màu chủ đạo ở một chỗ duy nhất (biến CSS).
+// ============================================================================
+.s_company_activities,
+.s_company_news_blocks,
+.s_company_most_viewed,
+.company_cta {
+    --company-accent: #E5282B;
+    --company-accent-dark: #c41f22;
+    --company-ink: #1a1a1a;
+    --company-muted: #8c8c8c;
+    --company-line: #e6e6e6;
+    --company-radius: 8px;
+}
+
+// ---- Tiêu đề lớn của khối -------------------------------------------------
+.s_company_title {
+    color: var(--company-accent);
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+}
+
+// ---- Bài viết (dùng chung) ------------------------------------------------
+.s_company_post {
+    .s_company_img {
+        display: block;
+        aspect-ratio: 16 / 9.6;
+        overflow: hidden;
+        border-radius: var(--company-radius);
+        background: #f1f1f1;
+        img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    }
+    .s_company_post_title {
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.25;
+        margin: .9rem 0 .5rem;
+        text-transform: uppercase;
+        a {
+            color: var(--company-ink);
+            text-decoration: none;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            &:hover { color: var(--company-accent); }
+        }
+    }
+    .s_company_post_teaser {
+        color: var(--company-muted);
+        font-size: .9rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
+}
+.s_company_date {
+    color: var(--company-muted);
+    font-size: .875rem;
+    .fa { margin-right: .35rem; }
+}
+.s_company_empty { color: var(--company-muted); text-align: center; padding: 2rem 0; }
+
+// ---- Snippet "Hoạt động công ty" --------------------------------------------
+.s_company_carousel {
+    position: relative;
+    padding: 0 3rem;
+}
+.s_company_cols {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    &::-webkit-scrollbar { display: none; }
+}
+.s_company_col {
+    flex: 0 0 33.3333%;
+    scroll-snap-align: start;
+    padding: 0 2rem;
+    border-right: 1px solid var(--company-line);
+    &:last-child { border-right: 0; }
+    .s_company_col_title {
+        color: var(--company-accent);
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    @media (max-width: 991.98px) { flex-basis: 50%; padding: 0 1rem; }
+    @media (max-width: 575.98px) { flex-basis: 100%; border-right: 0; }
+}
+.s_company_arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    border: 0;
+    background: none;
+    color: var(--company-accent);
+    font-size: 2.25rem;
+    line-height: 1;
+    padding: .25rem .75rem;
+    &.s_company_prev { left: 0; }
+    &.s_company_next { right: 0; }
+    &.s_company_arrow_hidden { visibility: hidden; }
+}
+
+// ---- Snippet "Tin tức theo thể loại" -------------------------------------
+.s_company_news_card .s_company_card_inner {
+    height: 100%;
+    background: #fff;
+    border: 1px solid var(--company-line);
+    border-radius: var(--company-radius);
+    padding: 1.5rem;
+    .s_company_card_title {
+        color: var(--company-accent);
+        font-weight: 700;
+        text-align: center;
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+    }
+}
+.s_company_bullets {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    li {
+        display: flex;
+        gap: .6rem;
+        padding: .65rem 0;
+        border-top: 1px solid var(--company-line);
+        .fa { color: var(--company-accent); margin-top: .2rem; }
+        a {
+            color: var(--company-ink);
+            font-weight: 500;
+            font-size: .95rem;
+            text-decoration: none;
+            &:hover { color: var(--company-accent); }
+        }
+    }
+}
+.s_company_viewall_wrap { text-align: center; margin-top: 1rem; }
+.s_company_viewall {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: var(--company-accent);
+    color: #fff;
+    font-weight: 600;
+    padding: .55rem 1.1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    &:hover { background: var(--company-accent-dark); color: #fff; }
+}
+
+// Card có độ rộng col-md-*: đứng riêng (ngoài .row) thì căn giữa.
+:not(.row) > .s_company_news_card[class*="col-md-"] {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// ---- Trang chi tiết bài: khối bên cạnh (bật/tắt trong panel Blog Page) ----
+.s_company_mv_list { list-style: none; margin: 1rem 0 0; padding: 0; }
+.s_company_mv_item {
+    display: flex;
+    gap: .9rem;
+    padding: .9rem 0;
+    border-top: 1px solid var(--company-line);
+    .s_company_img {
+        flex: 0 0 100px;
+        width: 100px;
+        aspect-ratio: 4 / 3;
+        border-radius: 4px;
+        overflow: hidden;
+        background: #f1f1f1;
+        img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    }
+    .s_company_mv_text { min-width: 0; }
+    .s_company_post_title {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+        font-size: .9rem;
+        font-weight: 600;
+        color: var(--company-ink);
+        text-decoration: none;
+        text-transform: none;
+        &:hover { color: var(--company-accent); }
+    }
+}
+
+.s_company_box {
+    border: 1px solid var(--company-line);
+    border-radius: var(--company-radius);
+    padding: 1.5rem;
+    .s_company_box_title {
+        color: var(--company-accent);
+        font-size: 1rem;
+        font-weight: 700;
+        padding-bottom: .75rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid var(--company-line);
+    }
+}
+.company_cta {
+    border-radius: var(--company-radius);
+    padding: 1.25rem;
+    // Chỉ giữ khung: màu nền/chữ do admin chọn trong panel Kiểu (Nền, màu chữ).
+    .company_cta_eyebrow {
+        font-size: .7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .02em;
+        margin-bottom: .35rem;
+    }
+    .company_cta_title {
+        position: relative;
+        display: block;
+        color: inherit;
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding-bottom: .6rem;
+        margin-bottom: .9rem;
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 2px;
+            background: currentColor;
+        }
+    }
+    p { font-size: .875rem; }
+    .company_cta_btn {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        color: inherit;
+        font-size: .8rem;
+        font-weight: 700;
+        padding: .45rem .9rem;
+        border: 1px solid currentColor;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+
+}
+
+// ---- Ảnh bìa đầy đủ trang chi tiết (bật trong panel Blog Page) -------------
+// <img> tự theo tỉ lệ gốc, quyết định chiều cao khung; khối ảnh bìa gốc của Odoo
+// (background cố định chiều cao) đặt chồng lên và trong suốt để vẫn bấm đổi ảnh được.
+.company_post_cover_wrap.company_has_cover {
+    position: relative;
+    margin-bottom: 1.5rem;
+    .company_post_cover_img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+    .o_wblog_post_page_cover_regular {
+        position: absolute;
+        inset: 0;
+        height: 100% !important;
+        margin: 0 !important;
+        opacity: 0;
+    }
+}
+
+// ---- Độ rộng thanh bên trang chi tiết ---------------------------------------
+// Chỉ áp khi thanh bên có khối eaut_blog_customize (CTA / Xem nhiều). Cột cố định 390px
+// (đổi ở biến --company-sidebar-width), cột nội dung tự co phần còn lại.
+@media (min-width: 992px) {
+    #o_wblog_post_sidebar_col:has(.company_cta, .s_company_most_viewed) {
+        --company-sidebar-width: 390px;
+        flex: 0 0 var(--company-sidebar-width);
+        // Bootstrap `.flex-grow-1` (có !important) đang nằm trên cột này nên phải
+        // ghi đè, nếu không cột sẽ phình ra chia đều phần dư với cột nội dung.
+        flex-grow: 0 !important;
+        width: var(--company-sidebar-width);
+        max-width: 100%;
+    }
+    // Cột nội dung lấy phần còn lại (flex-basis thắng width 75% của Odoo).
+    #o_wblog_post_content:has(~ #o_wblog_post_sidebar_col .company_cta, ~ #o_wblog_post_sidebar_col .s_company_most_viewed) {
+        flex: 1 1 0;
+        width: auto;
+        min-width: 0;
+    }
+}
